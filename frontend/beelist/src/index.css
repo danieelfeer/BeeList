@@ -11,43 +11,81 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
 }
 
 body {
   margin: 0;
-  display: flex;
   place-items: center;
-  min-width: 320px;
+  min-width: 100%;
   min-height: 100vh;
+  background-color: #ffba24;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-h1 {
-  font-size: 3.2em;
+h1#BIENVENIDO {
+  font-size: 85px;
   line-height: 1.1;
 }
 
-button {
+h2#loginH {
+  font-size: 45px;
+  ine-height: 1.1;
+}
+
+span#abe {
+  color: black;
+}
+
+div#bemvindo {
+  margin-top: -15%;
+}
+
+form div {
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 20px;
+  margin-right: 1%;
+}
+
+input {
+  width: 300px;
+  height: 30px;
+  font-size: 15px;
+  background-color: #000000;
+  border: 2px solid;
+  border-color: #000000;
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+}
+
+input:hover {
+  border-color: #b9e6e7;
+}
+
+button {
+  margin-top: 5%;
+  border-radius: 13px;
+  border: 2px solid transparent;
+  padding: 0.6em 2.5em;
+  font-size: 1.7em;
   font-weight: 500;
+  font: bold;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #000000;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #b9e6e7;
 }
 button:focus,
 button:focus-visible {
@@ -65,4 +103,18 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+@media (max-width: 768px) {
+
+  h1#BIENVENIDO {
+    font-size: 35px;
+    line-height: 1.1;
+  }
+
+  h2#loginH {
+    font-size: 25px;
+    ine-height: 1.1;
+  }
+
 }
