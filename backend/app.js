@@ -34,15 +34,15 @@ connection.connect((err) => {
 
 // Rota de login
 app.post('/login', (req, res) => {
-  const { email, password } = req.body;
+  const { email, senha } = req.body;
 
   // Verifica se o e-mail e a senha foram enviados
-  if (!email || !password) {
+  if (!email || !senha) {
     return res.status(400).json({ message: 'E-mail e senha são obrigatórios.' });
   }
 
   // Verifica no banco de dados se o e-mail e a senha são válidos
-  connection.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], (err, results) => {
+  connection.query('SELECT * FROM usuarios WHERE email = ? AND senha = ?', [email, senha], (err, results) => {
     if (err) {
       console.error('Erro ao consultar o banco de dados:', err.stack);
       return res.status(500).json({ message: 'Erro interno no servidor.' });
