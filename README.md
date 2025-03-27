@@ -6,13 +6,6 @@
 - **main**: Contém o código estável, pronto para produção. Não deve receber commits diretos, apenas merges vindos de `develop`.
 - **develop**: Branch principal de desenvolvimento. Todas as novas funcionalidades, correções de bugs e ajustes são integrados aqui antes de serem enviados para `main`.
 
-### Fluxo de Trabalho:
-1. **Criar uma nova funcionalidade:**
-   ```bash
-   git checkout develop
-   git checkout -b feature/nome-da-feature
-
-
 
 ### Tipos de Commits
 | Tipo       | Descrição                                            | Exemplo                                   |
@@ -30,3 +23,31 @@
 1. Commit simples:
    ```bash
    feat: adiciona funcionalidade de cadastro de tarefas
+
+
+##
+``` 🗂️ Estrutura de Pastas
+BeeList/
+├── backend/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── services/
+│   ├── tests/
+│   ├── utils/
+│   ├── app.js
+│   └── package.json
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── App.css
+│   │   ├── App.jsx
+│   │   ├── index.css
+│   │   └── index.jsx
+│   └── package.json
+├── .gitignore
+└── README.md
+```
