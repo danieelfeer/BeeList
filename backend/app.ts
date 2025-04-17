@@ -1,76 +1,40 @@
-// backend/app.ts
-
 import express from 'express';
-import cors from 'cors';
-import { DataSource } from 'typeorm'; 
-import { Usuario } from './models/Usuario';
 import dotenv from 'dotenv';
-import { env } from 'process';
+import { AppDataSource } from './config/data-source';  // O DataSource do TypeORM
+import { usuarioRoutes } from './routes/usuarioRoutes'; // As rotas do usuário
 
-dotenv.config();
+dotenv.config();  // Carregar variáveis de ambiente
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-app.use(cors());
-app.use(express.json());
-
-// Configuração do DataSource para MySQL
-const dataSource = new DataSource({
-  type: "mysql",                
-  host: "localhost",
-  port: 3306,
-  username: "root",
-  password: "root",
-  database: "beelist",
-  entities: [Usuario],          // Entidades (Modelos) a serem usadas
-  synchronize: true,            // Sincronizar as tabelas (não use em produção sem testes)
-  logging: true                 // Habilitar logs para debugar
+// Middleware para logar todas as requisições
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);  // Log de cada requisição
+  next();  // Passa para o próximo middleware
 });
 
-// Conectar ao banco de dados
-dataSource.initialize()
+// Middleware para parsear o corpo das requisições em JSON
+app.use(express.json());  // Necessário para processar o corpo da requisição como JSON
+
+// Rota para as APIs de usuário (login, cadastro, etc)
+app.use('/api/usuarios', usuarioRoutes);
+
+// Inicializar o banco de dados e iniciar o servidor
+AppDataSource.initialize()
   .then(() => {
-    console.log('Conectado ao banco de dados!');
+    console.log('Conectado ao banco de dados com sucesso!');
+    
+    const port = process.env.PORT || 3000;
+    app.listen(port, () => {
+      console.log(`Servidor rodando na porta ${port}`);
+    });
   })
   .catch((error) => {
-    console.error('Erro ao conectar ao banco de dados', error);
-    process.exit(1);  // Encerra o processo caso a conexão falhe
+    console.error('Erro ao conectar ao banco de dados:', error);
   });
 
-// Rota para criar um usuário
-app.post('/usuarios', async (req, res) => {
-  const { nome, email, senha } = req.body;
-  const usuarioRepository = dataSource.getRepository(Usuario);
-
-  const usuario = new Usuario();
-  usuario.nome = nome;
-  usuario.email = email;
-  usuario.senha = senha;  // **Lembre-se de hash a senha em produção**
-
-  try {
-    await usuarioRepository.save(usuario);
-    res.status(201).json(usuario);
-  } catch (error) {
-    console.error("Erro ao salvar o usuário:", error);
-    res.status(500).json({ message: 'Erro ao salvar o usuário', error });
-  }
-});
-
-// Rota para listar todos os usuários
-app.get('/usuarios', async (req, res) => {
-  const usuarioRepository = dataSource.getRepository(Usuario);
-
-  try {
-    const usuarios = await usuarioRepository.find();
-    res.status(200).json(usuarios);
-  } catch (error) {
-    console.error("Erro ao listar usuários:", error);
-    res.status(500).json({ message: 'Erro ao listar os usuários', error });
-  }
-});
-
-// Iniciar o servidor
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+// Rota de fallback para quando as rotas não forem encontradas
+app.use((req, res) => {
+  console.log(`Rota não encontrada: ${req.method} ${req.url}`);
+  res.status(404).json({ message: 'Rota não encontrada!' });
 });
