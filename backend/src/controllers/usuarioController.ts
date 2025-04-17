@@ -15,22 +15,28 @@ export class UsuarioController {
     }
   }
 
-  // Método para cadastro de usuário
   async cadastrar(req: Request, res: Response): Promise<Response> {
     const { nome, email, senha } = req.body;
-
+  
     console.log('Dados recebidos para cadastro:', { nome, email, senha });
-
+  
     // Verificar se os dados obrigatórios estão presentes
     if (!nome || !email || !senha) {
       console.error('Campos obrigatórios ausentes:', { nome, email, senha });
       return res.status(400).json({ error: 'Todos os campos (nome, email, senha) são obrigatórios!' });
     }
-
+  
+    // Verificar o formato do email
+    if (!/\S+@\S+\.\S+/.test(email)) { // RegEx simples para validar email
+      console.error('Formato de email inválido:', email);
+      return res.status(400).json({ error: 'Formato de email inválido!' });
+    }
+  
     try {
       // Tentar cadastrar o usuário
       console.log('Tentando cadastrar usuário...');
       const usuario = await this.usuarioService.cadastrarUsuario(nome, email, senha);
+  
       console.log('Usuário cadastrado com sucesso:', usuario);
       return res.status(201).json(usuario);
     } catch (error) {
@@ -43,5 +49,5 @@ export class UsuarioController {
       }
     }
   }
-
+  
 }

@@ -13,8 +13,8 @@ afterAll(async () => {
 describe('POST /api/usuarios/cadastro', () => {
   it('Deve cadastrar um usuário com dados válidos', async () => {
     const novoUsuario = { //Colocar usuário que não existe no banco de dados
-      nome: 'uuusuarioooooNovo',
-      email: 'uuuusuariooovalidoDeMais@example.com',
+      nome: 'uuusuarioooooNovissimoNovo',
+      email: 'uuuusuariooovalidoDeMaisemailNovo@example.com',
       senha: '112390',
     };
 
@@ -47,3 +47,24 @@ describe('POST /api/usuarios/cadastro', () => {
     expect(response.body).toHaveProperty('error', 'Email já cadastrado');
   });
 });
+
+describe('POST /api/usuarios/cadastro', () => {
+    it('Deve retornar erro ao enviar um email com formato inválido', async () => {
+      const usuarioComEmailInvalido = {
+        nome: 'usuário inválido',
+        email: 'email-invalido', // Formato inválido
+        senha: 'senhaValida123',
+      };
+  
+      const response = await request(app)
+        .post('/api/usuarios/cadastro')
+        .send(usuarioComEmailInvalido);
+  
+      // Verifica se a resposta tem status 400
+      expect(response.status).toBe(400);
+  
+      // Verifica se o erro é apropriado
+      expect(response.body).toHaveProperty('error', 'Formato de email inválido!');
+    });
+});
+  
