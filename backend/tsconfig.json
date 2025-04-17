@@ -3,7 +3,7 @@
     "target": "ES6",
     "module": "CommonJS",
     "outDir": "./dist",
-    "rootDir": "./",
+    "rootDir": "./src",   // Garantir que o código-fonte esteja na pasta src
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -12,12 +12,15 @@
     "emitDecoratorMetadata": true,
     "strict": true,
     "resolveJsonModule": true,
-    "allowJs": true
+    "allowJs": true,
+    "types": ["jest"],  // Adicionando suporte aos tipos do Jest
+    "isolatedModules": false,
   },
   "include": [
-    "./*"
+    "src/**/*"  // Apenas incluir os arquivos da pasta src
   ],
   "exclude": [
-    "./node_modules"
+    "node_modules",   // Não compilar a pasta node_modules
+    "tests"           // Ignorar a pasta de testes na compilação
   ]
 }
