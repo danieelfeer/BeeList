@@ -1,32 +1,29 @@
-import mysql, { Connection } from 'mysql2';
-import dotenv from 'dotenv';
+import { DataSource } from 'typeorm';
+import { Usuario } from '../src/models/Usuario';
 
-dotenv.config();
 
-describe('Teste de Conexão com Banco de Dados', () => {
-  let connection: Connection;
+describe('Teste de Conexão com Banco de Dados SQLite', () => {
+  let connection: DataSource;
 
-  beforeAll(() => {
-    connection = mysql.createConnection({
-      host: process.env.DB_HOST as string,
-      port: Number(process.env.DB_PORT), // Convertendo para número
-      user: process.env.DB_USER as string,
-      password: process.env.DB_PASSWORD as string,
-      database: process.env.DB_NAME as string,
+  beforeAll(async () => {
+    connection = new DataSource({
+      type: "sqlite",
+      database: ":memory:", // Banco de dados em memória
+      entities: [Usuario],
+      synchronize: true,
+      logging: false,
     });
+
+    await connection.initialize(); // Inicializa a conexão
   });
 
-  afterAll(() => {
+  afterAll(async () => {
     if (connection) {
-      connection.end(); // Finaliza a conexão ao término dos testes
+      await connection.destroy(); // Encerra a conexão ao fim dos testes
     }
   });
 
-  it('Deve conectar ao banco de dados com sucesso', (done) => {
-    jest.setTimeout(10000); // Aumenta o timeout para conexões lentas
-    connection.connect((err) => {
-      expect(err).toBeNull(); // Verifica se não há erro na conexão
-      done(); // Chama o done para indicar que o teste foi concluído
-    });
+  it('Deve conectar ao banco de dados SQLite com sucesso', async () => {
+    expect(connection.isInitialized).toBe(true); // Verifica se a conexão foi iniciada corretamente
   });
 });

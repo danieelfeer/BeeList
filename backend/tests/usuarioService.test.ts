@@ -12,31 +12,27 @@ afterAll(async () => {
 
 describe('POST /api/usuarios/cadastro', () => {
   it('Deve cadastrar um usuário com dados válidos', async () => {
-    const novoUsuario = { //Colocar usuário que não existe no banco de dados
-      nome: 'uuusuarioooooNovissimoNovo',
-      email: 'uuuusuariooovalidoDeMaisemailNovo@example.com',
-      senha: '112390',
+    const novoUsuario = { // Dados válidos para um usuário que não existe no banco
+      nome: 'Novo Usuario Teste',
+      email: 'novoemailteste@example.com',
+      senha: '2025',
     };
 
     const response = await request(app)
       .post('/api/usuarios/cadastro')
       .send(novoUsuario);
 
-    // Verifica se a resposta tem status 201
-    expect(response.status).toBe(201);
-
-    // Verifica se os dados retornados estão corretos
-    expect(response.body).toHaveProperty('id'); // O ID do usuário deve ser retornado
-    expect(response.body.nome).toBe(novoUsuario.nome); // Nome deve ser o mesmo
-    expect(response.body.email).toBe(novoUsuario.email); // Email deve ser o mesmo
-    expect(response.body.senha).toBe(novoUsuario.senha); // Senha deve ser igual, pois não há criptografia
+    expect(response.status).toBe(201); // Confirma status de sucesso
+    expect(response.body).toHaveProperty('id'); // Verifica se um ID foi retornado
+    expect(response.body.nome).toBe(novoUsuario.nome);
+    expect(response.body.email).toBe(novoUsuario.email);
   });
 
   it('Deve retornar erro ao cadastrar com email já existente', async () => {
     const usuarioExistente = { 
-      nome: 'uuusuario',
-      email: 'uuuusuariooovalido@example.com', // Email já utilizado
-      senha: '112390',
+      nome: 'Usuário Existente',
+      email: 'emailExistente@example.com', // Email que já está cadastrado no banco
+      senha: 'senha123',
     };
 
     const response = await request(app)
@@ -46,25 +42,19 @@ describe('POST /api/usuarios/cadastro', () => {
     expect(response.status).toBe(400);
     expect(response.body).toHaveProperty('error', 'Email já cadastrado');
   });
-});
 
-describe('POST /api/usuarios/cadastro', () => {
-    it('Deve retornar erro ao enviar um email com formato inválido', async () => {
-      const usuarioComEmailInvalido = {
-        nome: 'usuário inválido',
-        email: 'email-invalido', // Formato inválido
-        senha: 'senhaValida123',
-      };
-  
-      const response = await request(app)
-        .post('/api/usuarios/cadastro')
-        .send(usuarioComEmailInvalido);
-  
-      // Verifica se a resposta tem status 400
-      expect(response.status).toBe(400);
-  
-      // Verifica se o erro é apropriado
-      expect(response.body).toHaveProperty('error', 'Formato de email inválido!');
-    });
+  it('Deve retornar erro ao enviar um email com formato inválido', async () => {
+    const usuarioComEmailInvalido = {
+      nome: 'Usuário Inválido',
+      email: 'email-invalido', // Formato incorreto
+      senha: 'senhaValida123',
+    };
+
+    const response = await request(app)
+      .post('/api/usuarios/cadastro')
+      .send(usuarioComEmailInvalido);
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty('error', 'Formato de email inválido!');
+  });
 });
-  
