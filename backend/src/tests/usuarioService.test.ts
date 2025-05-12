@@ -1,9 +1,13 @@
 import request from 'supertest';
-import { app } from '../src/app';
-import { AppDataSource } from '../src/config/data-source';
+import { app } from '../app';
+import { AppDataSource } from '../config/data-source';
 
 beforeAll(async () => {
   await AppDataSource.initialize();
+});
+
+beforeEach(async () => {
+  await AppDataSource.getRepository("Usuario").clear(); // Limpa a tabela antes de cada teste
 });
 
 afterAll(async () => {
@@ -12,7 +16,7 @@ afterAll(async () => {
 
 describe('POST /api/usuarios/cadastro', () => {
   it('Deve cadastrar um usuário com dados válidos', async () => {
-    const novoUsuario = { // Dados válidos para um usuário que não existe no banco
+    const novoUsuario = { 
       nome: 'Novo Usuario Teste',
       email: 'novoemailteste@example.com',
       senha: '2025',
@@ -22,8 +26,8 @@ describe('POST /api/usuarios/cadastro', () => {
       .post('/api/usuarios/cadastro')
       .send(novoUsuario);
 
-    expect(response.status).toBe(201); // Confirma status de sucesso
-    expect(response.body).toHaveProperty('id'); // Verifica se um ID foi retornado
+    expect(response.status).toBe(201); 
+    expect(response.body).toHaveProperty('id');
     expect(response.body.nome).toBe(novoUsuario.nome);
     expect(response.body.email).toBe(novoUsuario.email);
   });
@@ -31,9 +35,11 @@ describe('POST /api/usuarios/cadastro', () => {
   it('Deve retornar erro ao cadastrar com email já existente', async () => {
     const usuarioExistente = { 
       nome: 'Usuário Existente',
-      email: 'emailExistente@example.com', // Email que já está cadastrado no banco
+      email: 'emailExistente@example.com',
       senha: 'senha123',
     };
+
+    await request(app).post('/api/usuarios/cadastro').send(usuarioExistente);
 
     const response = await request(app)
       .post('/api/usuarios/cadastro')
@@ -46,7 +52,7 @@ describe('POST /api/usuarios/cadastro', () => {
   it('Deve retornar erro ao enviar um email com formato inválido', async () => {
     const usuarioComEmailInvalido = {
       nome: 'Usuário Inválido',
-      email: 'email-invalido', // Formato incorreto
+      email: 'email-invalido', 
       senha: 'senhaValida123',
     };
 
@@ -55,6 +61,7 @@ describe('POST /api/usuarios/cadastro', () => {
       .send(usuarioComEmailInvalido);
 
     expect(response.status).toBe(400);
-    expect(response.body).toHaveProperty('error', 'Formato de email inválido!');
+    expect(response.body).toHaveProperty('error');
+    expect(response.body.error).toBe('Formato de email inválido!');
   });
 });

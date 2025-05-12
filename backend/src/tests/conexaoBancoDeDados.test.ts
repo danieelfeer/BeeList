@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { Usuario } from '../src/models/Usuario';
+import { Usuario } from '../models/Usuario';
 
 
 describe('Teste de Conexão com Banco de Dados SQLite', () => {

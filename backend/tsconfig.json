@@ -3,7 +3,7 @@
     "target": "ES6",
     "module": "CommonJS",
     "outDir": "./dist",
-    "rootDir": "./src",   // Garantir que o código-fonte esteja na pasta src
+    "rootDir": "./src",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -13,14 +13,13 @@
     "strict": true,
     "resolveJsonModule": true,
     "allowJs": true,
-    "types": ["jest"],  // Adicionando suporte aos tipos do Jest
-    "isolatedModules": false,
+    "types": ["jest", "node"]
   },
   "include": [
-    "src/**/*"  // Apenas incluir os arquivos da pasta src
+    "src/**/*",
+    "src/tests/**/*"  
   ],
   "exclude": [
-    "node_modules",   // Não compilar a pasta node_modules
-    "tests"           // Ignorar a pasta de testes na compilação
+    "node_modules"
   ]
 }
