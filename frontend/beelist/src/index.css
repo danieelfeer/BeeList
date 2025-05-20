@@ -1,120 +1,105 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+body, html {
+  height: 100%;
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.left-side {
+  background-color: #ffc900;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+
+.right-side {
+  background-color: #0F0F0F;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.BeeListLogo {
+  width: 700px;
+  height: auto;
+  margin-top: -80px;
+  margin-bottom: -40px;
+  margin-left: 35px;
+  align-self: flex-start; /* Mantém a logo no topo à esquerda */
   
 }
 
-body {
+.descricao {
   margin: 0;
-  place-items: center;
-  min-width: 100%;
-  min-height: 100vh;
-  background-color: #ffba24;
+  padding: 0;
+  
+}
+
+.slogan {
+  font-family: DmSans, sans-serif;
+  font-size: 90px;
   display: flex;
+  flex-direction:column;
+  margin-left: 40px;
   justify-content: center;
-  align-items: center;
+  font-weight: bold;
+  line-height: 1.2;
 }
 
-h1#BIENVENIDO {
-  font-size: 85px;
-  line-height: 1.1;
+.slogan1 {
+  font-family: DmSans, sans-serif;
+  font-size: 80px;
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  font-weight: bold;
+  line-height: 1.2;
 }
 
-h2#loginH {
-  font-size: 45px;
-  ine-height: 1.1;
+.slogan img.Logo {
+  width: 60px;
+  height: auto;
+   margin-left: 20px;
+  vertical-align: middle;
 }
 
-span#abe {
-  color: black;
+.descricao {
+  font-family: Nunito, sans-serif;
+  font-size: 18px;
+  margin-top: 27px;
+   margin-left: 40px;
+   line-height: 1.3;
+   
+  color: #000;
 }
 
-div#bemvindo {
-  margin-top: -15%;
-}
 
-form div {
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-label {
-  font-size: 20px;
-  margin-right: 1%;
-}
-
-input {
-  width: 300px;
-  height: 30px;
-  font-size: 15px;
-  background-color: #000000;
-  border: 2px solid;
-  border-color: #000000;
-  border-radius: 8px;
-}
-
-input:hover {
-  border-color: #b9e6e7;
-}
-
-button {
-  margin-top: 5%;
-  border-radius: 13px;
-  border: 2px solid transparent;
-  padding: 0.6em 2.5em;
-  font-size: 1.7em;
-  font-weight: 500;
-  font: bold;
-  font-family: inherit;
-  background-color: #000000;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #b9e6e7;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
 
 @media (max-width: 768px) {
 
-  h1#BIENVENIDO {
-    font-size: 35px;
-    line-height: 1.1;
+  h1#ParteAmarela {
+    font-size: 30px;
   }
 
   h2#loginH {
     font-size: 25px;
-    ine-height: 1.1;
+    line-height: 1.1;
+  }
+
+  img {
+    width: 100px;
   }
 
 }

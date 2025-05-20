@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -26,11 +27,13 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2 id="loginH">Log<span id="abe">in</span></h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">E-mail:</label>
+    <div className="login-container">
+      <img src="/src/img/BeeListLogoAmarelo.png" alt="Logo BeeList" className="BeeListLogoAmarelo" />
+      <div className="login-box">
+        <h2 className="login-title">Login</h2>
+
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="email">E-mail</label>
           <input
             type="email"
             id="email"
@@ -38,9 +41,8 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </div>
-        <div>
-          <label htmlFor="password">Senha:</label>
+
+          <label htmlFor="password">Senha</label>
           <input
             type="password"
             id="password"
@@ -48,10 +50,15 @@ const Login = () => {
             onChange={(e) => setSenha(e.target.value)}
             required
           />
-        </div>
-        <button type="submit">Entrar</button>
-      </form>
-      {message && <p>{message}</p>}
+
+          <a href="#" className="forgot">Esqueceu a senha?</a>
+
+          <button type="submit" className="login-btn">Entrar</button>
+        </form>
+
+        {message && <p className="login-message">{message}</p>}
+      </div>
+      <button className="register-btn">Cadastrar</button>
     </div>
   );
 };
