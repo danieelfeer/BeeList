@@ -66,6 +66,7 @@ input {
 }
 
 .forgot {
+  font-family: Nunito sans, sans-serif;
   font-size: 13px;
   color: #ccc;
   margin-top: 5px;
@@ -74,6 +75,7 @@ input {
 }
 
 .login-btn {
+  font-family: Nunito sans, sans-serif;
   margin-top: 15px;
   padding: 10px;
   background-color: #FFC700;
@@ -86,6 +88,7 @@ input {
 }
 
 .register-btn {
+  font-family: Nunito sans, sans-serif;
   margin-top: 530px;
   width: 250px;
   padding: 10px;
