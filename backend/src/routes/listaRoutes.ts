@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ListaController } from "../controllers/listaController";
+import { ListaController } from "../controllers/lista.controller";
 
 const listaController = new ListaController();
 const listaRoutes = Router();

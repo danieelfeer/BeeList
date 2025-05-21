@@ -1,4 +1,4 @@
-import { ListaRepository } from "../repositories/listaRepository";
+import { ListaRepository } from "../repositories/lista.repository";
 
 export class ListaService {
   private readonly listaRepo: ListaRepository;

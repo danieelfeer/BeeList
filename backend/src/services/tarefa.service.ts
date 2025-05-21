@@ -1,4 +1,4 @@
-import { TarefaRepository } from "../repositories/tarefaRepository";
+import { TarefaRepository } from "../repositories/tarefa.repository";
 
 export class TarefaService {
   private readonly tarefaRepo: TarefaRepository;

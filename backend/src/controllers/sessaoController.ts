@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { SessaoService } from "../services/sessaoService";
+import { SessaoService } from "../services/sessao.service";
 
 export class SessaoController {
   private readonly sessaoService: SessaoService;

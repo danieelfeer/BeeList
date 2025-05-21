@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { TarefaService } from "../services/tarefaService";
+import { TarefaService } from "../services/tarefa.service";
 
 export class TarefaController { 
   private readonly tarefaService: TarefaService;

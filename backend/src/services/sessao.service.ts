@@ -1,4 +1,4 @@
-import { SessaoRepository } from "../repositories/sessaoRepository";
+import { SessaoRepository } from "../repositories/sessao.repository";
 
 export class SessaoService {
   private readonly sessaoRepo: SessaoRepository;
