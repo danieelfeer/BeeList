@@ -10,11 +10,10 @@ const App = () => {
       <div className="left-side">
         <img src="/src/img/BeeListLogo.png" alt="Logo Beelist" className="BeeListLogo" />
         <h1 className="slogan">
-          Organize seu 🌍<br />
-          <h1 className="slogan1">
+          <span>Organize seu <img className="Logo" src="/src/img/globo-emoji.png" alt="emoji globo terrestre" /></span><br />
           como uma <br />
-          <strong>Colmeia <img src="/src/img/abelha.png" alt="Logo Beelist" className="Logo" /></strong>
-          </h1>
+          <span>Colmeia <img src="/src/img/abelha.png" alt="Logo Beelist" className="Logo" /></span>
+        
         </h1>
         <p className="descricao">
           BeeList, seu app de gerenciamento<br />
