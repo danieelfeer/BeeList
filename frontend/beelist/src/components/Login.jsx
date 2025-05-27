@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,7 +60,12 @@ const Login = () => {
 
         {message && <p className="login-message">{message}</p>}
       </div>
-      <button className="register-btn">Cadastrar</button>
+      <button
+        className="register-btn"
+        onClick={() => navigate('/cadastro')}
+      >
+        Cadastrar
+      </button>
     </div>
   );
 };
