@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { Link } from 'react-router-dom';
 import './TelaCadastro.css';
+import Cadastro from './components/Cadastro'; 
 
 
 const TelaCadastro = () => (
@@ -18,7 +18,7 @@ const TelaCadastro = () => (
       </p>
     </div>
     <div className="right-sideCadastro">
-   
+      <Cadastro />
     </div>
   </div>
 );

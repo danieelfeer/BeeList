@@ -1,44 +1,33 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Cadastro.css';
-import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 
 const Cadastro = () => {
   const [telefone, setTelefone] = useState('');
   return (
-    <div className="cadastro-container">
-      <h2>Cadastro</h2>
-        <img src="/src/img/BeeListLogoAmarelo.png" alt="Logo BeeList" className="BeeListLogoAmarelo" />
-      <form>
-        <label htmlFor="nome">Nome Completo</label>
-        <input type="text" id="nome" name="nome" required />
+    <div className="cadastro-wrapper">
+      <img src="/src/img/BeeListLogo.png" alt="Logo BeeList" className="BeeListLogoCadastro1" />
+      <div className="cadastro-container">
+        <h2>Cadastro</h2>
+        <form className="formCadastro">
+          <label className="labelCadastro" htmlFor="nome">Nome Completo</label>
+          <input className="inputCadastro" type="text" id="nome" name="nome" required />
 
-        <label htmlFor="email">E-mail</label>
-        <input type="email" id="email" name="email" required />
+          <label className="labelCadastro" htmlFor="email">E-mail</label>
+          <input className="inputCadastro" type="email" id="email" name="email" required />
 
-         <label htmlFor="data-nascimento">Data de Nascimento</label>
-        <input type="date" id="data" name="data-nascimento" required />
+          <label className="labelCadastro" htmlFor="data-nascimento">Data de Nascimento</label>
+          <input className="inputCadastro" type="date" id="data" name="data-nascimento" required />
 
-        <label htmlFor="telefone">Telefone</label>
-        <PhoneInput
-          country={'br'}
-          value={telefone}
-          onChange={setTelefone}
-          inputProps={{
-            name: 'telefone',
-            required: true,
-            autoFocus: false
-          }}
-        />
+          <label className="labelCadastro" htmlFor="senha">Senha</label>
+          <input className="inputCadastro" type="password" id="senha" name="senha" required />
 
-        <label htmlFor="senha">Senha</label>
-        <input type="password" id="senha" name="senha" required />
+          <button className="buttonCadastro" type="submit">Cadastre-se</button>
 
-      <Link to="/" className="">Tela inicial</Link>  
-
-        <button type="submit">Cadastrar</button>
-      </form>
+          <Link to="/" className="TelaInicialCadastro">Tela inicial</Link>  
+        </form>
+      </div>
     </div>
   );
 };
