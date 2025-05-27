@@ -1,6 +1,64 @@
-.container {
-  display: flex;
+body, html {
+  height: 100%;
+  font-family: 'DM Sans', sans-serif;
 }
-.left-side, .right-side {
-  flex: 1;
+
+.containerCadastro  {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+
+.left-sideCadastro {
+  background-color: #0F0F0F;
+  flex: 0.15;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.right-sideCadastro {
+  background-color: #ffc900;
+  flex: 2.85;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.BeeListLogoCadastro {
+  width: 700px;
+  height: auto;
+  margin-top: -80px;
+  margin-bottom: -40px;
+  margin-left: -120px;
+  align-self: flex-start;
+  
+}
+
+.descricaoCadastro {
+  color: #ffc900;
+  margin: 0;
+  font-size: 1.2rem;    
+  padding: 0;
+  margin-top: -60px;
+  margin-left: 140px;
+  
+}
+
+.descricaoCadastro a {
+  color: #ffc900; 
+  text-decoration: underline; 
+  font-weight: bold; 
+}
+
+.sloganCadastro {
+  color: #ffc900;
+  font-size: 6rem;
+  display: flex;
+  flex-direction:column;
+  margin-left: 65px;
+  justify-content: center;
+  font-weight: 600;
+  line-height: 1.2;
 }

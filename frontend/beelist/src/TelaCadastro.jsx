@@ -6,18 +6,18 @@ import './TelaCadastro.css';
 
 
 const TelaCadastro = () => (
-  <div className="container">
-    <div className="left-side">
-      <img src="/src/img/BeeListLogoAmarelo.png" alt="Logo Beelist" className="BeeListLogo" />
-      <h1 className="slogan">
+  <div className="containerCadastro">
+    <div className="left-sideCadastro">
+      <img src="/src/img/BeeListLogoAmarelo.png" alt="Logo Beelist" className="BeeListLogoCadastro" />
+      <h1 className="sloganCadastro">
         <span>Cadastrar<img className="Logo"/></span><br />
       
       </h1>
-      <p className="descricao">
+      <p className="descricaoCadastro">
         Já possui uma conta? <Link to="/">Faça login</Link>
       </p>
     </div>
-    <div className="right-side">
+    <div className="right-sideCadastro">
    
     </div>
   </div>
