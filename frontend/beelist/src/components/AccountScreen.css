@@ -1,0 +1,54 @@
+/* Fundo da tela */
+.account-container {
+    background-color: #ffc400;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    font-family: 'Arial', sans-serif;
+    position: relative;
+    text-align: center;
+  }
+  
+  /* Botão de voltar */
+  .back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 32px;
+    cursor: pointer;
+  }
+  
+  /* Título */
+  .account-title {
+    font-size: 36px;
+    color: #1c1c1c;
+  }
+  
+  /* Opções */
+  .account-options {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    align-items: center;
+  }
+  
+  /* Botões */
+  .account-button {
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #1c1c1c;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: transform 0.2s ease;
+  }
+  
+  .account-button:hover {
+    transform: scale(1.08);
+  }

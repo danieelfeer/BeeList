@@ -8,7 +8,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<>
+        <Route path="/" element={
           <div className="container">
             <div className="left-side">
               <img src="/src/img/BeeListLogo.png" alt="Logo Beelist" className="BeeListLogo" />
@@ -16,7 +16,6 @@ const App = () => {
                 <span>Organize seu <img className="Logo" src="/src/img/globo-emoji.png" alt="emoji globo terrestre" /></span><br />
                 como uma <br />
                 <span>Colmeia <img src="/src/img/abelha.png" alt="Logo Beelist" className="Logo" /></span>
-              
               </h1>
               <p className="descricao">
                 BeeList, seu app de gerenciamento<br />
@@ -29,7 +28,7 @@ const App = () => {
               <Login />
             </div>
           </div>
-        </>} />
+        } />
         <Route path="/cadastro" element={<TelaCadastro />} />
       </Routes>
     </BrowserRouter>

@@ -22,7 +22,7 @@ const Login = () => {
     const data = await response.json();
 
     if (response.status === 200) {
-      setMessage('Login realizado com sucesso!');
+      navigate('/menu');
     } else {
       setMessage(data.message || 'Erro desconhecido');
     }
