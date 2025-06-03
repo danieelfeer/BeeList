@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { SessaoController } from "../controllers/sessaoController";
+import { SessaoController } from "../controllers/sessao.controller";
 
 const sessaoController = new SessaoController();
 const sessaoRoutes = Router();
