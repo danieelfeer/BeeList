@@ -11,3 +11,9 @@ body, html {
   width: 100vw;
   font-family: 'DM Sans', sans-serif;
 }
+
+:root{
+  --color-background: black;
+  --text-font: 'DM sans', sans-serif;
+  
+}

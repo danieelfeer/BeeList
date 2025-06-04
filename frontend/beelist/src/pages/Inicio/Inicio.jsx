@@ -1,91 +1,45 @@
 import React, { useState } from "react";
+import { DndContext, closestCenter, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
+import { SortableContext, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import { defaultLists } from "./data";
+import { SortableList } from "./SortableList";
+import { TiPlus } from "react-icons/ti";
 import "./Inicio.css";
 
-const Inicio = () => {
-  const [openList, setOpenList] = useState(null);
+export default function Inicio() {
+  const [lists, setLists] = useState(defaultLists);
+  const [openLists, setOpenLists] = useState([]);
+  const sensors = useSensors(useSensor(PointerSensor));
 
-  const toggleList = (listName) => {
-    setOpenList(openList === listName ? null : listName);
+  const toggleList = (listId) => {
+    setOpenLists((prev) => prev.includes(listId) ? prev.filter((id) => id !== listId) : [...prev, listId]);
+  };
+
+  const handleDragEnd = ({ active, over }) => {
+    if (active.id !== over?.id) {
+      const oldIndex = lists.findIndex((list) => list.id === active.id);
+      const newIndex = lists.findIndex((list) => list.id === over.id);
+      setLists((prev) => arrayMove(prev, oldIndex, newIndex));
+    }
   };
 
   return (
     <div className="container-inicio">
-      <img src="/src/assets/images/abelha.png" alt="Logo Beelist" className="Logo" />
-      <header>
-        <div className="logo">
-          <span>≣</span>
-          <span>List</span>
-        </div>
-        <div className="profile-icon">👤</div>
+      <header className="header-inicio">
+        <img src="/src/assets/images/BeeList-Logo.svg" alt="Logo BeeList" className="beelist-logo" />
       </header>
-
       <main>
-        {/* Lista de compras */}
-        <div className="list">
-          <div className="list-header" onClick={() => toggleList("compras")}>
-            <span className="drag-icon">⋮⋮⋮</span>
-            <button className="list-button">
-              Lista de compras {openList === "compras" ? "▴" : "▾"}
-            </button>
-          </div>
-          {openList === "compras" && (
-            <div className="list-content">
-              <p className="section-title">Itens</p>
-              <ul>
-                <li>Arroz</li>
-                <li>Feijão</li>
-                <li>Macarrão</li>
-              </ul>
-            </div>
-          )}
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+          <SortableContext items={lists.map((l) => l.id)} strategy={verticalListSortingStrategy}>
+            {lists.map((list) => (
+              <SortableList key={list.id} list={list} isOpen={openLists.includes(list.id)} toggleList={toggleList} />
+            ))}
+          </SortableContext>
+        </DndContext>
+        <div className="button-container">
+          <div className="add-button"><TiPlus color="black" size={50}/></div>
         </div>
-
-        {/* Lista de presentes */}
-        <div className="list">
-          <div className="list-header" onClick={() => toggleList("presentes")}>
-            <span className="drag-icon">⋮⋮⋮</span>
-            <button className="list-button">
-              Lista de presentes {openList === "presentes" ? "▴" : "▾"}
-            </button>
-          </div>
-          {openList === "presentes" && (
-            <div className="list-content">
-              <p className="section-title">Presentes</p>
-              <ul>
-                <li>Camisa</li>
-                <li>Perfume</li>
-                <li>Relógio</li>
-              </ul>
-            </div>
-          )}
-        </div>
-
-        {/* Lista de farmácia */}
-        <div className="list">
-          <div className="list-header" onClick={() => toggleList("farmacia")}>
-            <span className="drag-icon">⋮⋮⋮</span>
-            <button className="list-button">
-              Farmácia {openList === "farmacia" ? "▴" : "▾"}
-            </button>
-          </div>
-          {openList === "farmacia" && (
-            <div className="list-content">
-              <p className="section-title">Remédios</p>
-              <ul>
-                <li>Paracetamol</li>
-                <li>Ibuprofeno</li>
-                <li>Loratadina</li>
-                <li>Dipirona</li>
-              </ul>
-            </div>
-          )}
-        </div>
-
-        {/* Botão de adicionar */}
-        <div className="add-button">+</div>
       </main>
     </div>
   );
-};
-
-export default Inicio;
+}

@@ -1,23 +1,23 @@
-
   .container-inicio {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    background-color: #111111;
+    color: white;
   }
-  
-  header {
+
+  .header-inicio {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
     max-width: 450px;
-    margin-bottom: 30px;
+    margin-bottom: 5rem;
   }
-  
-  .logo {
+
+  header .beelist-logo {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -25,7 +25,7 @@
     font-weight: bold;
     font-size: 1.5rem;
   }
-  
+
   .profile-icon {
     background-color: #ffc400;
     color: black;
@@ -37,7 +37,7 @@
     justify-content: center;
     align-items: center;
   }
-  
+
   main {
     display: flex;
     flex-direction: column;
@@ -45,7 +45,7 @@
     gap: 20px;
     width: 100%;
   }
-  
+
   .list {
     border: 1px solid #ffc400;
     border-radius: 6px;
@@ -55,19 +55,19 @@
     text-align: left;
     font-size: 1.1rem;
   }
-  
+
   .list-header {
     display: flex;
     align-items: center;
     gap: 12px;
     cursor: pointer;
   }
-  
+
   .drag-icon {
     color: #ffc400;
     font-size: 24px;
   }
-  
+
   .list-button {
     background: none;
     border: none;
@@ -77,51 +77,86 @@
     flex-grow: 1;
     text-align: left;
   }
-  
+
   .list-button:focus {
     outline: none;
   }
-  
+
   .list-content {
     margin-top: 12px;
     padding-left: 28px;
   }
-  
+
   .section-title {
     color: #ffc400;
     font-size: 1rem;
     margin-bottom: 6px;
     text-decoration: underline;
   }
-  
+
   ul {
     padding-left: 20px;
   }
-  
-  .add-button {
-    margin-top: 35px;
-    background-color: #ffc400;
-    color: black;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    font-size: 2.2rem;
+
+  .button-container{
+    width: 100vw;
+    height: 20vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+  }
+
+  .add-button {
+    width: 80px;
+    height: 70px;
+    background: #ffbf00;
+    color: white;
+    font-size: 2rem;
+    border: none;
     cursor: pointer;
-    font-weight: bold;
-    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    clip-path: polygon(
+      25% 0%, 75% 0%, 
+      100% 50%, 
+      75% 100%, 25% 100%, 
+      0% 50%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 2rem;
+    right: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+  }
+  .add-button:hover {
+    transform: scale(1.1);
+  }
+
+  .list-container {
+    display: flex;
+    align-items: center;
   }
   
+  .drag-handle {
+    cursor: grab;
+    padding: 5px;
+    font-size: 1.5rem;
+    margin-right: 10px;
+  }
+  
+  .drag-handle:active {
+    cursor: grabbing;
+  }
+  
+
   /* Responsivo para telas pequenas */
   @media (max-width: 480px) {
     .list {
       width: 90%;
     }
-  
+
     header {
       max-width: 90%;
     }
   }
-  
