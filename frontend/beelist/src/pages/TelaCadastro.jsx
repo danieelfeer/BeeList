@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import 'react-phone-input-2/lib/style.css';
 import { Link } from 'react-router-dom';
 import './TelaCadastro.css';
-import Cadastro from './components/Cadastro'; 
+import Cadastro from './Cadastro/Cadastro'; 
 
 
 const TelaCadastro = () => (
   <div className="containerCadastro">
     <div className="left-sideCadastro">
-      <img src="/src/img/BeeListLogoAmarelo.png" alt="Logo Beelist" className="BeeListLogoCadastro" />
+      <img src="/src/assets/images/BeeListLogoAmarelo.png" alt="Logo Beelist" className="BeeListLogoCadastro" />
       <h1 className="sloganCadastro">
         <span>Cadastrar<img className="Logo"/></span><br />
       

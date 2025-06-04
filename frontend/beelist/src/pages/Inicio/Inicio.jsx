@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./menuU.css";
+import "./Inicio.css";
 
-const MenuU = () => {
+const Inicio = () => {
   const [openList, setOpenList] = useState(null);
 
   const toggleList = (listName) => {
@@ -9,8 +9,8 @@ const MenuU = () => {
   };
 
   return (
-    <div className="container">
-      <img src="/src/img/abelha.png" alt="Logo Beelist" className="Logo" />
+    <div className="container-inicio">
+      <img src="/src/assets/images/abelha.png" alt="Logo Beelist" className="Logo" />
       <header>
         <div className="logo">
           <span>≣</span>
@@ -88,4 +88,4 @@ const MenuU = () => {
   );
 };
 
-export default MenuU;
+export default Inicio;

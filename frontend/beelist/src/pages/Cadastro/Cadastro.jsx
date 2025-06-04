@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Cadastro.css';
-import 'react-phone-input-2/lib/style.css';
 
 const Cadastro = () => {
   const [telefone, setTelefone] = useState('');
   return (
     <div className="cadastro-wrapper">
-      <img src="/src/img/BeeListLogo.png" alt="Logo BeeList" className="BeeListLogoCadastro1" />
+      <img src="/src/assets/images/BeeListLogo.png" alt="Logo BeeList" className="BeeListLogoCadastro1" />
       <div className="cadastro-container">
         <h2>Cadastro</h2>
         <form className="formCadastro">
