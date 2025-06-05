@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Importando o hook de navegação
 import { DndContext, closestCenter, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { SortableContext, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { defaultLists } from "./data";
 import { SortableList } from "./SortableList";
 import { TiPlus } from "react-icons/ti";
+import { MdAccountCircle } from "react-icons/md";
 import "./Inicio.css";
 
 export default function Inicio() {
+  const navigate = useNavigate(); // Criando função de navegação
   const [lists, setLists] = useState(defaultLists);
   const [openLists, setOpenLists] = useState([]);
   const sensors = useSensors(useSensor(PointerSensor));
@@ -27,6 +30,12 @@ export default function Inicio() {
     <div className="container-inicio">
       <header className="header-inicio">
         <img src="/src/assets/images/BeeList-Logo.svg" alt="Logo BeeList" className="beelist-logo" />
+
+        <MdAccountCircle
+          className="account-icon"
+          size={55}
+          onClick={() => navigate("/conta")}
+        />
       </header>
       <main>
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
@@ -37,7 +46,10 @@ export default function Inicio() {
           </SortableContext>
         </DndContext>
         <div className="button-container">
-          <div className="add-button"><TiPlus color="black" size={50}/></div>
+          {/* Botão que navega para a página de CriarTarefa */}
+          <div className="add-button" onClick={() => navigate("/criar-lista")}>
+            <TiPlus color="black" size={50}/>
+          </div>
         </div>
       </main>
     </div>

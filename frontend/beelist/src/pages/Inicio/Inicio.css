@@ -1,162 +1,93 @@
-  .container-inicio {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #111111;
-    color: white;
-  }
+.container-inicio {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #111111;
+  color: white;
+}
 
-  .header-inicio {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 450px;
-    margin-bottom: 5rem;
-  }
+.header-inicio {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 450px;
+  margin-bottom: 5rem;
+}
 
-  header .beelist-logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #ffc400;
-    font-weight: bold;
-    font-size: 1.5rem;
-  }
+header .beelist-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffc400;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
 
-  .profile-icon {
-    background-color: #ffc400;
-    color: black;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    font-size: 1.8rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.account-icon {
+  color: #ffc400;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
 
-  main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-  }
+.account-icon:hover {
+  transform: scale(1.1);
+}
 
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.button-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 10vw;
+}
+
+/* Botão de adicionar */
+.add-button {
+  width: 80px;
+  height: 70px;
+  background: #ffbf00;
+  color: white;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+  clip-path: polygon(
+    25% 0%, 75% 0%, 
+    100% 50%, 
+    75% 100%, 25% 100%, 
+    0% 50%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 2rem;
+  right: 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.add-button:hover {
+  transform: scale(1.1);
+}
+
+/* Responsivo para telas pequenas */
+@media (max-width: 480px) {
   .list {
-    border: 1px solid #ffc400;
-    border-radius: 6px;
-    padding: 14px;
-    width: 100%;
-    max-width: 450px;
-    text-align: left;
-    font-size: 1.1rem;
+    width: 90%;
   }
 
-  .list-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
+  header {
+    max-width: 90%;
   }
-
-  .drag-icon {
-    color: #ffc400;
-    font-size: 24px;
-  }
-
-  .list-button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.1rem;
-    cursor: pointer;
-    flex-grow: 1;
-    text-align: left;
-  }
-
-  .list-button:focus {
-    outline: none;
-  }
-
-  .list-content {
-    margin-top: 12px;
-    padding-left: 28px;
-  }
-
-  .section-title {
-    color: #ffc400;
-    font-size: 1rem;
-    margin-bottom: 6px;
-    text-decoration: underline;
-  }
-
-  ul {
-    padding-left: 20px;
-  }
-
-  .button-container{
-    width: 100vw;
-    height: 20vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .add-button {
-    width: 80px;
-    height: 70px;
-    background: #ffbf00;
-    color: white;
-    font-size: 2rem;
-    border: none;
-    cursor: pointer;
-    clip-path: polygon(
-      25% 0%, 75% 0%, 
-      100% 50%, 
-      75% 100%, 25% 100%, 
-      0% 50%
-    );
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    bottom: 2rem;
-    right: 2rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s;
-  }
-  .add-button:hover {
-    transform: scale(1.1);
-  }
-
-  .list-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .drag-handle {
-    cursor: grab;
-    padding: 5px;
-    font-size: 1.5rem;
-    margin-right: 10px;
-  }
-  
-  .drag-handle:active {
-    cursor: grabbing;
-  }
-  
-
-  /* Responsivo para telas pequenas */
-  @media (max-width: 480px) {
-    .list {
-      width: 90%;
-    }
-
-    header {
-      max-width: 90%;
-    }
-  }
+}

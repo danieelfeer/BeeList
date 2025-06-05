@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './TelaCadastro.css';
-import Cadastro from './Cadastro/Cadastro'; 
+import Cadastro from './Cadastro'; 
 
 
 const TelaCadastro = () => (

@@ -1,0 +1,91 @@
+.list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    max-width: 450px;
+    font-size: 1.1rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+  }
+  
+  .list-header {
+    display: flex;
+    flex: row;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    border: 1px solid #ffc400;
+    border-radius: 0.6rem;
+    width: 100%;
+    background-color: #1a1a1a;
+  }
+  
+  .list-button {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    text-align: left;
+    gap: 0.5rem;
+  }
+
+  .list-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .list-button:focus {
+    outline: none;
+  }
+  
+  .drag-handle {
+    cursor: grab;
+    font-size: 1.5rem;
+  }
+  
+  .drag-handle:active {
+    cursor: grabbing;
+  }
+  
+  .list-content {
+    width: 100%;
+    padding: 0.5rem;
+    border-top: 2px solid #ffc400;
+    animation: fadeIn 0.2s ease-in-out;
+  }
+  
+  .section-title {
+    color: #ffc400;
+    font-size: 1rem;
+    margin-bottom: 6px;
+    text-decoration: underline;
+  }
+  
+  ul {
+    padding-left: 20px;
+  }
+  
+  /* Animação suave */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
