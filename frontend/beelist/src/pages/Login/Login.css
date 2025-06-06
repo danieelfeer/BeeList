@@ -142,7 +142,7 @@ label {
   font-size: 14px;
 }
 
-input {
+form > input {
   padding: 10px;
   background-color: #1a1a1a;
   border: 1px solid #FFC700;

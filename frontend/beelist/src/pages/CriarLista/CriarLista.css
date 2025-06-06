@@ -1,1 +1,124 @@
-    
+.criar-lista{
+    width: 100vw;
+    height: 100vh;
+}
+
+.topo{
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.botao-voltar{
+    background-color: transparent;
+    border: none;
+    margin-left: 4rem;
+    margin-top: 5rem;
+}
+.botao-voltar:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.titulo-input {
+  border: none; /* Remove a borda */
+  outline: none; /* Remove o contorno ao focar */
+  background: transparent; /* Fundo transparente */
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  padding: 10px 40px 10px 10px; /* Ajuste para espaço do ícone */
+}
+.titulo-input:focus {
+  border-bottom: 2px solid #ffc400;
+}
+.titulo-container {
+  position: relative;
+  display: inline-block;
+}
+
+.lapis-icone {
+  position: absolute;
+  right: 10px; /* Ajuste a posição dentro do input */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #ffc400;
+}
+
+.botao-criar-sessao{
+  background-color: transparent;
+  border: none;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  color: #ffc400;
+  font-size: 1.25rem;
+  transition: color 0.3s ease;
+  cursor: pointer;
+} 
+.icone-botao {
+  transition: color 0.3s ease; /* Suaviza a mudança de cor */
+}
+
+.botao-criar-sessao:hover{
+  color: #7a5e01; /* Cor ao passar o mouse */
+}
+ 
+
+
+
+.sessoes {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 450px;
+  padding-bottom: 5rem;
+}
+
+.sessao {
+  display: flex;
+  flex-direction: column;
+  background: #1a1a1a;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.sessao-input {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 8px;
+  color: white;
+  font-size: 1rem;
+}
+
+.sessao-input:focus {
+  outline: 2px solid #ffc400;
+}
+
+.botao-adicionar-tarefa {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-top: 8px;
+}
+
+.botao-adicionar-tarefa:hover {
+  color: #ffc400;
+}
+

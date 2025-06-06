@@ -4,7 +4,7 @@ import { DndContext, closestCenter, PointerSensor, useSensor, useSensors } from 
 import { SortableContext, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { defaultLists } from "./data";
 import { SortableList } from "./SortableList";
-import { TiPlus } from "react-icons/ti";
+import BotaoAdicionar from "../../components/BotaoAdicionar/BotaoAdicionar";
 import { MdAccountCircle } from "react-icons/md";
 import "./Inicio.css";
 
@@ -45,12 +45,7 @@ export default function Inicio() {
             ))}
           </SortableContext>
         </DndContext>
-        <div className="button-container">
-          {/* Botão que navega para a página de CriarTarefa */}
-          <div className="add-button" onClick={() => navigate("/criar-lista")}>
-            <TiPlus color="black" size={50}/>
-          </div>
-        </div>
+        <BotaoAdicionar onClick={() => navigate("/criar-lista")} />
       </main>
     </div>
   );
