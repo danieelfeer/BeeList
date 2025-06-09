@@ -27,7 +27,7 @@ export class ListaController {
   async listar(req: Request, res: Response) {
     try {
       const listas = await this.listaService.listarListas();
-      return res.status(200).json(listas);
+      return res.status(200).json(listas);  // Lista agora vem com as sessões e tarefas
     } catch (error) {
       console.error("Erro ao listar listas:", error);
       return res.status(500).json({ error: "Erro interno ao listar listas." });

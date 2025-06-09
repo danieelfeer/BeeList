@@ -72,6 +72,12 @@
     margin-bottom: 6px;
     text-decoration: underline;
   }
+
+  .riscar {
+    text-decoration: line-through;
+    color: #aaa; /* Cor mais clara para dar aquele efeito de tarefa concluída */
+  }
+  
   
   ul {
     padding-left: 20px;

@@ -15,6 +15,13 @@ export class ListaRepository {
   }
 
   async listarTodas(): Promise<Lista[]> {
-    return await this.repo.find();
+    // Aqui usamos o "relations" para buscar as sessões associadas
+    return await this.repo.find({
+      relations: {
+        sessoes: {
+          tarefas: true,  // Aqui estamos também buscando as tarefas associadas à sessão
+        },
+      },
+    });
   }
 }

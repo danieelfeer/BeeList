@@ -110,6 +110,7 @@ export default function CriarLista() {
 
       const response = await api.post("/listas", dados);
       alert("Lista salva com sucesso!");
+      navigate("/inicio"); // Navega para a página inicial após o salvamento bem-sucedido
       // Limpar ou navegar após o salvamento
     } catch (error) {
       alert("Erro ao salvar lista");

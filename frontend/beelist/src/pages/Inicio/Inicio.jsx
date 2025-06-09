@@ -1,18 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Importando o hook de navegação
 import { DndContext, closestCenter, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { SortableContext, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
-import { defaultLists } from "./data";
 import { SortableList } from "./SortableList";
 import BotaoAdicionar from "../../components/BotaoAdicionar/BotaoAdicionar";
 import { MdAccountCircle } from "react-icons/md";
+import api from "../../api/axios";  // Adicionando o axios para fazer requisições
 import "./Inicio.css";
 
 export default function Inicio() {
   const navigate = useNavigate(); // Criando função de navegação
-  const [lists, setLists] = useState(defaultLists);
+  const [lists, setLists] = useState([]); // Lista agora é obtida do backend
   const [openLists, setOpenLists] = useState([]);
   const sensors = useSensors(useSensor(PointerSensor));
+
+  // Função para buscar as listas do backend
+  useEffect(() => {
+    const fetchLists = async () => {
+      try {
+        const response = await api.get("/listas");  // Requisição para buscar as listas
+        setLists(response.data);  // Atualiza o estado com as listas recebidas
+      } catch (error) {
+        console.error("Erro ao buscar listas:", error);
+      }
+    };
+
+    fetchLists();
+  }, []); // O efeito roda apenas uma vez, quando o componente é montado
 
   const toggleList = (listId) => {
     setOpenLists((prev) => prev.includes(listId) ? prev.filter((id) => id !== listId) : [...prev, listId]);

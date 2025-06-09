@@ -1,3 +1,4 @@
+import React from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { RiDraggable } from "react-icons/ri";
@@ -12,23 +13,32 @@ export function SortableList({ list, isOpen, toggleList }) {
   return (
     <div ref={setNodeRef} style={style} className="list">
       <span className="drag-handle" {...listeners} {...attributes}>
-          <RiDraggable color="#ffc400" size={40} />
+        <RiDraggable color="#ffc400" size={40} />
       </span>
       <div className="list-header">
 
         <button className="list-button" onClick={() => toggleList(list.id)}>
           <div className="list-title">
-            {list.title}
+            {list.nome}
             {isOpen ? <IoIosArrowUp size={30} color="#ffc400" /> : <IoIosArrowDown size={30} color="#ffc400" />}
           </div>
-          
+
           {/* Movendo a list-content para dentro do botão */}
           {isOpen && (
             <div className="list-content">
-              <p className="section-title">Itens</p>
+              <p className="section-title">Sessão</p>
               <ul>
-                {list.items.map((item, index) => (
-                  <li key={index}>{item}</li>
+                {list.sessoes.map((sessao, index) => (
+                  <li key={index}>
+                    <strong>{sessao.titulo}</strong>
+                    <ul>
+                      {sessao.tarefas.map((tarefa) => (
+                        <li key={tarefa.id} className={tarefa.concluida ? 'riscar' : ''}>
+                          {tarefa.titulo}
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -38,5 +48,3 @@ export function SortableList({ list, isOpen, toggleList }) {
     </div>
   );
 }
-
-

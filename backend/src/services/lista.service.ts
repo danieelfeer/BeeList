@@ -45,10 +45,8 @@ export class ListaService {
     return lista;  // Retorne a lista criada
   }
   
-  
-  
 
   async listarListas() {
-    return await this.listaRepo.listarTodas();
+    return await this.listaRepo.listarTodas(); // Retorna as listas com suas sessões e tarefas
   }
 }
