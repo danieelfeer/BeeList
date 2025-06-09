@@ -10,13 +10,13 @@ export class TarefaRepository {
     this.repo = AppDataSource.getRepository(Tarefa);
   }
 
-  // Criar uma nova tarefa (corrigido)
-  async criar(titulo: string, sessaoId: number): Promise<Tarefa> {
+  // Método corrigido para aceitar 'titulo', 'concluida' e 'sessaoId'
+  async criar(titulo: string, concluida: boolean, sessaoId: number): Promise<Tarefa> {
     // Verifica se a sessão existe antes de criar a tarefa
     const sessao = await AppDataSource.getRepository(Sessao).findOne({ where: { id: sessaoId } });
     if (!sessao) throw new Error("Sessão não encontrada");
 
-    const tarefa = this.repo.create({ titulo, concluida: false, sessao });
+    const tarefa = this.repo.create({ titulo, concluida, sessao: { id: sessaoId } });
     return await this.repo.save(tarefa);
   }
 

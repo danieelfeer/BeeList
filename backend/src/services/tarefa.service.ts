@@ -9,7 +9,7 @@ export class TarefaService {
 
   // Criar uma nova tarefa
   async criarTarefa(titulo: string, sessaoId: number) {
-    return await this.tarefaRepo.criar(titulo, sessaoId);
+    return await this.tarefaRepo.criar(titulo, false, sessaoId);
   }
 
   // Listar todas as tarefas de uma sessão

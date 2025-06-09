@@ -8,7 +8,7 @@ export class Sessao {
   id: number;
 
   @Column({ length: 255 })
-  nome: string;
+  titulo: string;
 
   @ManyToOne(() => Lista, lista => lista.sessoes)
   lista: Lista; // Cada seção pertence a uma lista

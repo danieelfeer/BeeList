@@ -10,8 +10,8 @@ export class Tarefa {
   titulo: string;
 
   @Column({ default: false })
-  concluida: boolean; // Define se a tarefa foi concluída ou não
+  concluida: boolean;
 
-  @ManyToOne(() => Sessao, sessao => sessao.tarefas)
-  sessao: Sessao; // Cada tarefa pertence a uma seção específica
+  @ManyToOne(() => Sessao, (sessao) => sessao.tarefas)
+  sessao: Sessao;
 }

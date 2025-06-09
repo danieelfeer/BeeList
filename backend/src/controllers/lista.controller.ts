@@ -9,21 +9,21 @@ export class ListaController {
   }
 
   async criar(req: Request, res: Response) {
+    const { nome, sessoes } = req.body;
+    console.log('Recebido:', req.body);  // Verifique o que foi enviado
+  
     try {
-      const { nome } = req.body;
-
-      if (!nome) {
-        return res.status(400).json({ error: "O nome da lista é obrigatório!" });
-      }
-
-      const lista = await this.listaService.criarLista(nome);
-      return res.status(201).json(lista);
+      // Criação da lista
+      const lista = await this.listaService.criarLista(nome, sessoes);
+      console.log('Lista criada:', lista);  // Verifique se a lista foi criada
+  
+      return res.status(201).json(lista);  // Retorne a lista que foi criada
     } catch (error) {
       console.error("Erro ao criar lista:", error);
       return res.status(500).json({ error: "Erro interno ao criar lista." });
     }
   }
-
+  
   async listar(req: Request, res: Response) {
     try {
       const listas = await this.listaService.listarListas();

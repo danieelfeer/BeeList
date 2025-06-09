@@ -8,6 +8,7 @@ import { DndContext } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { Tarefa } from "../../components/Tarefa/Tarefa"; // Componente atualizado para suportar arrastar
 import "./CriarLista.css";
+import api from "../../api/axios";
 
 export default function CriarLista() {
   const navigate = useNavigate();
@@ -23,7 +24,6 @@ export default function CriarLista() {
     novasSessoes[index].tarefas.push({
       id: Date.now().toString(),
       title: "",
-      description: "",
       isOpen: false,
       autoFocus: true, // Aqui passamos que a tarefa recém-adicionada deve receber foco
     });
@@ -93,6 +93,30 @@ export default function CriarLista() {
     );
   };
 
+  const salvarLista = async () => {
+    try {
+      // Prepara os dados para enviar ao backend
+      const dados = {
+        nome: titulo,
+        sessoes: sessoes.map(sessao => ({
+          titulo: sessao.titulo,  // Certifique-se de que esse valor não seja null ou undefined
+          tarefas: sessao.tarefas.map(tarefa => ({
+            titulo: tarefa.title,
+            concluida: tarefa.concluida || false,
+          })),
+        })),
+      };
+
+
+      const response = await api.post("/listas", dados);
+      alert("Lista salva com sucesso!");
+      // Limpar ou navegar após o salvamento
+    } catch (error) {
+      alert("Erro ao salvar lista");
+      console.error(error);
+    }
+  };
+
   return (
     <div className="criar-lista">
       <div className="topo">
@@ -116,11 +140,25 @@ export default function CriarLista() {
         <button className="botao-criar-sessao" onClick={adicionarSessao}>
           <IoAddOutline size={40} className="icone-botao" /> Criar nova Sessão
         </button>
+        <button className="botao-salvar" onClick={salvarLista}>
+          Salvar Lista
+        </button>
 
         <div className="sessoes">
           {sessoes.map((sessao, index) => (
             <div key={index} className="sessao">
-              <input type="text" placeholder="Nome da Sessão" className="sessao-input" />
+              <input
+                type="text"
+                placeholder="Nome da Sessão"
+                className="sessao-input"
+                value={sessao.titulo} // Vincule ao estado correto
+                onChange={(e) => {
+                  const novaSessao = [...sessoes];
+                  novaSessao[index].titulo = e.target.value; // Atualiza o título da sessão
+                  setSessoes(novaSessao); // Atualiza o estado
+                }}
+              />
+
 
               <button className="botao-adicionar-tarefa" onClick={() => adicionarTarefa(index)}>
                 <IoAddOutline size={24} color="#ffc400" /> Adicionar Tarefa
