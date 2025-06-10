@@ -20,8 +20,18 @@
     width: 100%;
     background-color: #1a1a1a;
   }
+
+  .list-title > button{
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: white;
+    background: none;
+    border:none;
+
+    cursor: pointer;
+  }
   
-  .list-button {
+  .list-container {
     display: flex;
     flex-direction: column;
     flex: 1;

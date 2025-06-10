@@ -13,6 +13,7 @@ const App = () => {
         <Route path="/cadastro" element={<TelaCadastro />} />
         <Route path="/inicio" element={<Inicio />} />
         <Route path="/criar-lista" element={<CriarLista />} />
+        <Route path="/criar-lista/:id" element={<CriarLista />} />
       </Routes>
     </BrowserRouter>
   );

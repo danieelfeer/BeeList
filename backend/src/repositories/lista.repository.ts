@@ -8,6 +8,12 @@ export class ListaRepository {
   constructor() {
     this.repo = AppDataSource.getRepository(Lista);
   }
+  // ListaRepository
+  async buscarPorId(id: number): Promise<Lista | null> {
+    
+    return await this.repo.findOneBy({ id: id });
+  }
+  
 
   async criar(nome: string): Promise<Lista> {
     const lista = this.repo.create({ nome });
@@ -15,13 +21,51 @@ export class ListaRepository {
   }
 
   async listarTodas(): Promise<Lista[]> {
-    // Aqui usamos o "relations" para buscar as sessões associadas
     return await this.repo.find({
       relations: {
         sessoes: {
-          tarefas: true,  // Aqui estamos também buscando as tarefas associadas à sessão
+          tarefas: true,
         },
       },
     });
+  }
+
+  // Método para atualizar a lista
+  async atualizar(
+    id: number,
+    nome: string,
+    sessoes: any[]
+  ): Promise<Lista | null> {
+    const lista = await this.repo.findOne({
+      where: { id:id },
+      relations: { sessoes: true }, // Carregando as sessões associadas
+    });
+
+    if (!lista) {
+      return null; // Se a lista não existir, retorna null
+    }
+
+    lista.nome = nome;
+
+    // Atualizando as sessões e tarefas associadas
+    for (const sessaoData of sessoes) {
+      const sessao = lista.sessoes.find((s) => s.id === sessaoData.id);
+
+      if (sessao) {
+        // Atualizando os dados da sessão
+        sessao.titulo = sessaoData.titulo;
+
+        // Atualizando as tarefas da sessão
+        for (const tarefaData of sessaoData.tarefas) {
+          const tarefa = sessao.tarefas.find((t) => t.id === tarefaData.id);
+          if (tarefa) {
+            tarefa.titulo = tarefaData.titulo;
+            tarefa.concluida = tarefaData.concluida;
+          }
+        }
+      }
+    }
+
+    return await this.repo.save(lista); // Salva as atualizações no banco
   }
 }

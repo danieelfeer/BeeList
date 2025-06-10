@@ -17,13 +17,14 @@ export function SortableList({ list, isOpen, toggleList }) {
       </span>
       <div className="list-header">
 
-        <button className="list-button" onClick={() => toggleList(list.id)}>
+        <div className="list-container">
           <div className="list-title">
-            {list.nome}
-            {isOpen ? <IoIosArrowUp size={30} color="#ffc400" /> : <IoIosArrowDown size={30} color="#ffc400" />}
+            <button>{list.nome}</button>
+            <button onClick={() => toggleList(list.id)}>
+              {isOpen ? <IoIosArrowUp size={30} color="#ffc400" /> : <IoIosArrowDown size={30} color="#ffc400" />}
+            </button>
           </div>
 
-          {/* Movendo a list-content para dentro do botão */}
           {isOpen && (
             <div className="list-content">
               <p className="section-title">Sessão</p>
@@ -43,7 +44,7 @@ export function SortableList({ list, isOpen, toggleList }) {
               </ul>
             </div>
           )}
-        </button>
+        </div>
       </div>
     </div>
   );
