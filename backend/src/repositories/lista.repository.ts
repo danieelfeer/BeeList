@@ -10,8 +10,14 @@ export class ListaRepository {
   }
   // ListaRepository
   async buscarPorId(id: number): Promise<Lista | null> {
-    
-    return await this.repo.findOneBy({ id: id });
+    return await this.repo.findOne({
+      where: { id },
+      relations: {
+        sessoes: {  // Incluindo as sessões
+          tarefas: true,  // Incluindo as tarefas dentro das sessões
+        },
+      },
+    });
   }
   
 
