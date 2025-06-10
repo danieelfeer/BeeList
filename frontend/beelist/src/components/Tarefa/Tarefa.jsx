@@ -34,9 +34,9 @@ export function Tarefa({ tarefa, atualizarTarefa, removerTarefa, autoFocus }) {
         <input
           type="text"
           ref={inputRef}
-          value={tarefa.title || ""}
+          value={tarefa.titulo || ""}
           placeholder="Nova Tarefa"
-          onChange={(e) => atualizarTarefa(tarefa.id, { title: e.target.value })}
+          onChange={(e) => atualizarTarefa(tarefa.id, { titulo: e.target.value })}
           className={`tarefa-input ${tarefa.concluida ? "concluida" : ""}`}
         />
 

@@ -75,3 +75,4 @@ export class ListaRepository {
     return await this.repo.save(lista); // Salva as atualizações no banco
   }
 }
+  

@@ -4,11 +4,19 @@ import { CSS } from "@dnd-kit/utilities";
 import { RiDraggable } from "react-icons/ri";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import './SortableList.css'
+import { useNavigate } from "react-router-dom";
 
 export function SortableList({ list, isOpen, toggleList }) {
   const { setNodeRef, attributes, listeners, transform, transition } = useSortable({ id: list.id });
+  const navigate = useNavigate();
 
   const style = { transform: CSS.Transform.toString(transform), transition };
+
+  const handleTitleClick = () => {
+    // Navega para a página de edição, passando o ID da lista
+    navigate(`/criar-lista/${list.id}`);
+  };
+
 
   return (
     <div ref={setNodeRef} style={style} className="list">
@@ -19,7 +27,7 @@ export function SortableList({ list, isOpen, toggleList }) {
 
         <div className="list-container">
           <div className="list-title">
-            <button>{list.nome}</button>
+            <button onClick={handleTitleClick}>{list.nome}</button>
             <button onClick={() => toggleList(list.id)}>
               {isOpen ? <IoIosArrowUp size={30} color="#ffc400" /> : <IoIosArrowDown size={30} color="#ffc400" />}
             </button>

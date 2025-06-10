@@ -2,8 +2,8 @@ import HamburguerMenu from "../../components/HamburguerMenu/HamburguerMenu";
 import { IoIosArrowBack } from "react-icons/io";
 import { LuPencilLine } from "react-icons/lu";
 import { IoAddOutline } from "react-icons/io5";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect} from "react";
+import { useNavigate, useParams} from "react-router-dom";
 import { DndContext } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { Tarefa } from "../../components/Tarefa/Tarefa"; // Componente atualizado para suportar arrastar
@@ -12,8 +12,29 @@ import api from "../../api/axios";
 
 export default function CriarLista() {
   const navigate = useNavigate();
+  const { id } = useParams();
+
   const [titulo, setTitulo] = useState("");
   const [sessoes, setSessoes] = useState([]);
+
+  useEffect(() => {
+    if (id) {
+      api.get(`/listas/${id}`)
+        .then((response) => {
+          const lista = response.data;
+          console.log('Lista carregada:', lista); 
+          console.log('Sessoes:', lista.sessoes); // Verificar se sessoes existem
+          lista.sessoes.forEach(sessao => console.log(`Tarefas da sessão "${sessao.titulo}":`, sessao.tarefas));
+  
+          setTitulo(lista.nome);
+          setSessoes(lista.sessoes || []);
+        })
+        .catch((error) => {
+          console.error("Erro ao carregar lista:", error);
+        });
+    }
+  }, [id]);
+  
 
   const adicionarSessao = () => {
     setSessoes([...sessoes, { nome: "", tarefas: [] }]);
@@ -23,7 +44,7 @@ export default function CriarLista() {
     const novasSessoes = [...sessoes];
     novasSessoes[index].tarefas.push({
       id: Date.now().toString(),
-      title: "",
+      titulo: "",
       isOpen: false,
       autoFocus: true, // Aqui passamos que a tarefa recém-adicionada deve receber foco
     });
@@ -93,25 +114,35 @@ export default function CriarLista() {
     );
   };
 
+  
   const salvarLista = async () => {
     try {
-      // Prepara os dados para enviar ao backend
       const dados = {
         nome: titulo,
-        sessoes: sessoes.map(sessao => ({
-          titulo: sessao.titulo,  // Certifique-se de que esse valor não seja null ou undefined
-          tarefas: sessao.tarefas.map(tarefa => ({
-            titulo: tarefa.title,
+        sessoes: sessoes.map((sessao) => ({
+          titulo: sessao.titulo,
+          tarefas: sessao.tarefas.map((tarefa) => ({
+            titulo: tarefa.titulo,
             concluida: tarefa.concluida || false,
           })),
         })),
       };
 
+      if (id) {
+        // Se estamos editando, fazemos um PUT para atualizar
+        await api.put(`/listas/${id}`, dados);
+        console.log("ID da lista:", id);
+        console.log("Dados enviados para atualização:", dados);
 
-      const response = await api.post("/listas", dados);
-      alert("Lista salva com sucesso!");
-      navigate("/inicio"); // Navega para a página inicial após o salvamento bem-sucedido
-      // Limpar ou navegar após o salvamento
+        alert("Lista atualizada com sucesso!");
+      } else {
+        // Se estamos criando uma nova lista, fazemos um POST
+        await api.post("/listas", dados);
+        alert("Lista criada com sucesso!");
+      } 
+      
+      navigate("/inicio"); // Navega para a página inicial após o salvamento
+
     } catch (error) {
       alert("Erro ao salvar lista");
       console.error(error);
@@ -171,6 +202,7 @@ export default function CriarLista() {
                     {sessao.tarefas.map((tarefa) => (
                       <Tarefa
                         key={tarefa.id}
+                        titulo={tarefa.titulo}
                         tarefa={tarefa}
                         atualizarTarefa={(id, updates) => atualizarTarefa(index, id, updates)}
                         removerTarefa={(id) => removerTarefa(index, id)}

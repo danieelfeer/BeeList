@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { ListaService } from "../services/lista.service";
-import { error } from "console";
 
 export class ListaController {
   private readonly listaService: ListaService;
@@ -10,8 +9,7 @@ export class ListaController {
   }
 
   async buscarPorId(req: Request, res: Response) {
-     const listId: number = Number(req.params.id); // O parâmetro 'id' vem da URL // Isso vai te ajudar a verificar o valor de 'id'
-  
+     const listId: number = Number(req.params.id); 
   
     try {
       const lista = await this.listaService.buscarListaPorId(listId);
@@ -50,24 +48,30 @@ export class ListaController {
 
   // Método para atualizar a lista
   async atualizar(req: Request, res: Response) {
-    const { listaId } = req.params; // Recebe o id da lista da URL
+    const { listaId } = req.params; // Recebe o ID da lista da URL
     const { nome, sessoes } = req.body; // Recebe os dados no corpo da requisição
-
+  
+    console.log("Recebendo atualização para lista ID:", listaId); // Verifica o ID recebido
+    console.log("Dados recebidos para atualização:", { nome, sessoes }); // Verifica os dados recebidos
+  
     try {
       const listaAtualizada = await this.listaService.atualizarLista(
-        Number(listaId), // Converte o id da lista para número
+        Number(listaId), // Converte ID para número
         nome,
         sessoes
       );
+  
       if (!listaAtualizada) {
+        console.log("Lista não encontrada para atualização!");
         return res.status(404).json({ message: "Lista não encontrada!" });
       }
+  
+      console.log("Lista foi atualizada com sucesso:", listaAtualizada);
       return res.status(200).json(listaAtualizada);
     } catch (error) {
       console.error("Erro ao atualizar lista:", error);
-      return res
-        .status(500)
-        .json({ error: "Erro interno ao atualizar lista." });
+      return res.status(500).json({ error: "Erro interno ao atualizar lista." });
     }
   }
+  
 }
