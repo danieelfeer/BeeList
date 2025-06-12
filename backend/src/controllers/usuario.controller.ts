@@ -1,45 +1,49 @@
 import { Request, Response } from 'express';
-import { UsuarioService } from '../services/usuario.service';
+import { AppDataSource } from '../config/data-source';
+import { Usuario } from '../models/Usuario';
 
 export class UsuarioController {
-  private usuarioService: UsuarioService;
-
-  constructor() {
-    this.usuarioService = new UsuarioService();
-  }
-
-  async cadastrar(req: Request, res: Response): Promise<Response> {
-    const { nome, email, senha } = req.body;
-
-    if (!nome || !email || !senha) {
-      return res.status(400).json({ error: "Todos os campos são obrigatórios!" });
-    }
+  async cadastrar(req: Request, res: Response) {
+    const { nome, email, dataNascimento, senha } = req.body;
 
     try {
-      const usuario = await this.usuarioService.cadastrarUsuario(nome, email, senha);
-      return res.status(201).json(usuario);
-    } catch (error) {
-      return res.status(400).json({ error: error instanceof Error ? error.message : "Erro desconhecido" });
+      const usuarioRepo = AppDataSource.getRepository(Usuario);
+
+      const novoUsuario = usuarioRepo.create({
+        nome,
+        email,
+        dataNascimento,
+        senha
+      });
+
+      await usuarioRepo.save(novoUsuario);
+
+      res.status(201).json({ message: 'Usuário cadastrado com sucesso!' });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Erro ao cadastrar usuário.' });
     }
   }
 
-  async login(req: Request, res: Response): Promise<Response> {
-    const { email, password } = req.body;
+  // ...existing code...
 
-    if (!email || !password) {
-      return res.status(400).json({ error: "Email e senha são obrigatórios." });
-    }
+  async login(req: Request, res: Response) {
+    const { email, senha } = req.body;
 
     try {
-      const usuario = await this.usuarioService.buscarPorEmail(email);
+      const usuarioRepo = AppDataSource.getRepository(Usuario);
+      const usuario = await usuarioRepo.findOneBy({ email, senha });
 
-      if (!usuario || usuario.senha !== password) {
-        return res.status(401).json({ error: "Credenciais inválidas." });
+      if (!usuario) {
+        return res.status(401).json({ error: 'Email ou senha inválidos.' });
       }
 
-      return res.status(200).json({ message: "Login realizado com sucesso", usuario });
-    } catch (error) {
-      return res.status(500).json({ error: "Erro interno do servidor." });
+      res.status(200).json({ message: 'Login realizado com sucesso!' });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Erro ao realizar login.' });
     }
   }
+
+// ...existing code...
 }

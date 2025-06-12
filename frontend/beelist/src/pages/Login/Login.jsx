@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
-import '../../index.css'
+import '../../index.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -12,25 +12,25 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Conexão com Back
-    // const response = await fetch('http://localhost:5000/api/usuarios/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ email, password: senha }),
-    // });
-    
+    try {
+      const response = await fetch('http://localhost:3000/api/usuarios/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, senha }), // Corrigido aqui!
+      });
 
-    // const data = await response.json();
+      const data = await response.json();
 
-    // if (response.status === 200) {
-    //   navigate('/inicio');
-    // } else {
-    //   setMessage(data.message || 'Erro desconhecido');
-    // }
-
-    navigate('/inicio');
+      if (response.status === 200) {
+        navigate('/inicio');
+      } else {
+        setMessage(data.error || data.message || 'Email ou senha inválidos');
+      }
+    } catch (error) {
+      setMessage('Erro ao conectar com o servidor.');
+    }
   };
 
   return (
