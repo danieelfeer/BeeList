@@ -1,0 +1,99 @@
+.onboarding-main {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(90deg, #ffc400 50%, #1c1c1c 50%);
+}
+
+.onboarding-left {
+  flex: 1;
+  padding: 4rem;
+  color: #1c1c1c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo {
+  width: 160px;
+  margin-bottom: 2.5rem;
+}
+
+.main-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.main-subtitle {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.main-description {
+  font-size: 1.2rem;
+  max-width: 500px;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+.onboarding-indicators {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #8b8b8b;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background-color: #1c1c1c;
+}
+
+.onboarding-button {
+  background-color: #1c1c1c;
+  color: #ffc400;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: fit-content;
+}
+
+.onboarding-button:hover {
+  transform: scale(1.05);
+  background-color: #333;
+}
+
+.skip-text {
+  margin-top: 1.5rem;
+  color: #333;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.onboarding-right {
+  flex: 1;
+  background-color: #1c1c1c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+}
+
+.onboarding-image {
+  width: 90%;
+  max-width: 450px;
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(255, 196, 0, 0.2);
+}

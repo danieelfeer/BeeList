@@ -1,0 +1,56 @@
+.perfil-container {
+  padding: 2rem;
+  background-color: #1c1c1c;
+  color: white;
+  min-height: 100vh;
+}
+
+.perfil-form {
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.perfil-form h2 {
+  color: #ffc400;
+  text-align: center;
+}
+
+.perfil-form label {
+  font-weight: bold;
+}
+
+.perfil-form input {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: none;
+}
+
+.botao-salvar,
+.botao-sair {
+  background-color: #ffc400;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.botao-sair {
+  background-color: #ff5f5f;
+  color: #1c1c1c;
+}
+
+.botao-salvar:hover,
+.botao-sair:hover {
+  filter: brightness(1.1);
+}
+
+.topo .botao-voltar {
+  background: none;
+  border: none;
+  margin-bottom: 1rem;
+}
