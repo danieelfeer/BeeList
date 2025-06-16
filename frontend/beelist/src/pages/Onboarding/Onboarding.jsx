@@ -7,19 +7,19 @@ const slides = [
     titulo: "Organize sua vida 🌍",
     subtitulo: "Com a eficiência de uma Colmeia 🐝",
     descricao: "A BeeList ajuda você a organizar tarefas, metas e prioridades de forma simples e intuitiva.",
-    imagem: "/src/assets/images/slade1.jpeg",
+    imagem: "/src/assets/images/slade1.png",
   },
   {
     titulo: "Crie listas personalizadas ✅",
     subtitulo: "Planeje tudo, do trabalho ao mercado",
     descricao: "Separe tarefas por categoria, adicione prazos e receba lembretes. Sua rotina no controle!",
-    imagem: "/src/assets/images/slade2.jpeg",
+    imagem: "/src/assets/images/slade2.png",
   },
   {
     titulo: "Acompanhe seu progresso 📊",
     subtitulo: "Visualize conquistas e conclua metas",
     descricao: "Com gráficos e indicadores, você monitora seu desempenho e se mantém motivado todos os dias.",
-    imagem: "/src/assets/images/slade3.jpeg",
+    imagem: "/src/assets/images/slade3.png",
   },
 ];
 
