@@ -22,8 +22,8 @@
 }
 
 .BeeListLogoCadastro1 {
-  display: block;
-  width: 500px;      
+  display: flex;
+  width: 400px;      
   max-width: 90vw;   
   margin: 40px auto 24px auto; 
   margin-top: -130px;
