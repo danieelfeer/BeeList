@@ -2,7 +2,6 @@ import HamburguerMenu from "../../components/HamburguerMenu/HamburguerMenu";
 import { IoIosArrowBack } from "react-icons/io";
 import { LuPencilLine } from "react-icons/lu";
 import { IoAddOutline } from "react-icons/io5";
-import { FaBars } from "react-icons/fa"; // Adicione este import
 import { useState, useEffect} from "react";
 import { useNavigate, useParams} from "react-router-dom";
 import { DndContext } from "@dnd-kit/core";
@@ -10,7 +9,6 @@ import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { Tarefa } from "../../components/Tarefa/Tarefa"; // Componente atualizado para suportar arrastar
 import "./CriarLista.css";
 import api from "../../api/axios";
-import SidebarMenu from "../../components/SidebarMenu/SidebarMenu"; 
 
 export default function CriarLista() {
   const navigate = useNavigate();
@@ -154,28 +152,30 @@ export default function CriarLista() {
     }
   };
 
+  // Funções para o menu hamburguer
+  const handleExportPDF = () => alert("Exportar como PDF");
+  const handleExportXLS = () => alert("Exportar como XLS");
+  const handlePrint = () => window.print();
+  const handleGetPro = () => alert("Obter BeeList Pro");
+  const handleDeleteList = () => alert("Deletar lista");
+
   return (
     <div className="criar-lista">
       <div className="topo">
         <button className="botao-voltar" onClick={() => navigate("/inicio")}>
           <IoIosArrowBack size={60} color="#ffc400" />
         </button>
-        {/* Botão hambúrguer no topo direito */}
-        <button
-          className="hamburguer-btn"
-          onClick={() => setMenuOpen(true)}
-          style={{
-            background: "none",
-            border: "none",
-            marginRight: "3rem",
-            marginTop: "5rem",
-            cursor: "pointer"
-          }}
-        >
-          <FaBars size={40} color="#ffc400" />
-        </button>
-        {/* Menu lateral */}
-        <SidebarMenu open={menuOpen} onClose={() => setMenuOpen(false)} nome={nomeUsuario} />
+        {/* Substitua o botão FaBars pelo HamburguerMenu */}
+        <div style={{ position: "absolute", top: "2rem", right: "2rem" }}>
+          <HamburguerMenu
+            nomeUsuario={nomeUsuario}
+            onExportPDF={handleExportPDF}
+            onExportXLS={handleExportXLS}
+            onPrint={handlePrint}
+            onGetPro={handleGetPro}
+            onDeleteList={handleDeleteList}
+          />
+        </div>
       </div>
 
       <main className="main-criar-lista">

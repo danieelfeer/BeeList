@@ -25,7 +25,7 @@ const Cadastro = () => {
 
       if (response.status === 201) {
         setMessage('Usuário cadastrado com sucesso!');
-        setTimeout(() => navigate('/'), 1500); // Redireciona para login após 1,5s
+        setTimeout(() => navigate('/Login'), 1500); // Redireciona para login após 1,5s
       } else {
         setMessage(data.error || data.message || 'Erro ao cadastrar.');
       }
