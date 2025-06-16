@@ -2,8 +2,8 @@ import HamburguerMenu from "../../components/HamburguerMenu/HamburguerMenu";
 import { IoIosArrowBack } from "react-icons/io";
 import { LuPencilLine } from "react-icons/lu";
 import { IoAddOutline } from "react-icons/io5";
-import { useState, useEffect} from "react";
-import { useNavigate, useParams} from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { DndContext } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { Tarefa } from "../../components/Tarefa/Tarefa"; // Componente atualizado para suportar arrastar
@@ -14,6 +14,7 @@ export default function CriarLista() {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  // O backend espera "titulo" para a lista
   const [titulo, setTitulo] = useState("");
   const [sessoes, setSessoes] = useState([]);
 
@@ -22,11 +23,14 @@ export default function CriarLista() {
       api.get(`/listas/${id}`)
         .then((response) => {
           const lista = response.data;
-          console.log('Lista carregada:', lista); 
-          console.log('Sessoes:', lista.sessoes); // Verificar se sessoes existem
-          lista.sessoes.forEach(sessao => console.log(`Tarefas da sessão "${sessao.titulo}":`, sessao.tarefas));
+          console.log("Lista carregada:", lista); 
+          console.log("Sessoes:", lista.sessoes); // Verificar se sessoes existem
+          lista.sessoes.forEach((sessao) =>
+            console.log(`Tarefas da sessão "${sessao.titulo}":`, sessao.tarefas)
+          );
   
-          setTitulo(lista.nome);
+          // Use o campo "titulo" conforme definido no backend, e não "nome"
+          setTitulo(lista.titulo);
           setSessoes(lista.sessoes || []);
         })
         .catch((error) => {
@@ -35,9 +39,9 @@ export default function CriarLista() {
     }
   }, [id]);
   
-
   const adicionarSessao = () => {
-    setSessoes([...sessoes, { nome: "", tarefas: [] }]);
+    // Cada sessão terá um título vazio e um array de tarefas vazio
+    setSessoes([...sessoes, { titulo: "", tarefas: [] }]);
   };
 
   const adicionarTarefa = (index) => {
@@ -46,22 +50,23 @@ export default function CriarLista() {
       id: Date.now().toString(),
       titulo: "",
       isOpen: false,
-      autoFocus: true, // Aqui passamos que a tarefa recém-adicionada deve receber foco
+      autoFocus: true, // A tarefa recém-adicionada recebe foco
+      // O backend espera "concluida", inicializando como false se não definido:
+      concluida: false,
     });
     setSessoes(novasSessoes);
   };
-
 
   const atualizarTarefa = (sessaoIndex, tarefaId, updates) => {
     setSessoes((prevSessoes) =>
       prevSessoes.map((sessao, sIndex) =>
         sIndex === sessaoIndex
           ? {
-            ...sessao,
-            tarefas: sessao.tarefas.map((tarefa) =>
-              tarefa.id === tarefaId ? { ...tarefa, ...updates } : tarefa
-            ),
-          }
+              ...sessao,
+              tarefas: sessao.tarefas.map((tarefa) =>
+                tarefa.id === tarefaId ? { ...tarefa, ...updates } : tarefa
+              ),
+            }
           : sessao
       )
     );
@@ -77,18 +82,16 @@ export default function CriarLista() {
     );
   };
 
-
-
   const toggleTarefa = (sessaoIndex, tarefaId) => {
     setSessoes((prevSessoes) =>
       prevSessoes.map((sessao, sIndex) =>
         sIndex === sessaoIndex
           ? {
-            ...sessao,
-            tarefas: sessao.tarefas.map((tarefa) =>
-              tarefa.id === tarefaId ? { ...tarefa, isOpen: !tarefa.isOpen } : tarefa
-            ),
-          }
+              ...sessao,
+              tarefas: sessao.tarefas.map((tarefa) =>
+                tarefa.id === tarefaId ? { ...tarefa, isOpen: !tarefa.isOpen } : tarefa
+              ),
+            }
           : sessao
       )
     );
@@ -102,23 +105,23 @@ export default function CriarLista() {
       prevSessoes.map((sessao, sIndex) =>
         sIndex === sessaoIndex
           ? {
-            ...sessao,
-            tarefas: arrayMove(
-              sessao.tarefas,
-              sessao.tarefas.findIndex((t) => t.id === active.id),
-              sessao.tarefas.findIndex((t) => t.id === over.id)
-            ),
-          }
+              ...sessao,
+              tarefas: arrayMove(
+                sessao.tarefas,
+                sessao.tarefas.findIndex((t) => t.id === active.id),
+                sessao.tarefas.findIndex((t) => t.id === over.id)
+              ),
+            }
           : sessao
       )
     );
   };
 
-  
   const salvarLista = async () => {
     try {
+      // Mapeia os dados de acordo com o modelo backend: título e sessões com título e tarefas
       const dados = {
-        nome: titulo,
+        titulo: titulo, // Use "titulo" em vez de "nome"
         sessoes: sessoes.map((sessao) => ({
           titulo: sessao.titulo,
           tarefas: sessao.tarefas.map((tarefa) => ({
@@ -127,22 +130,27 @@ export default function CriarLista() {
           })),
         })),
       };
-
+  
       if (id) {
-        // Se estamos editando, fazemos um PUT para atualizar
+        // Atualiza a lista existente
         await api.put(`/listas/${id}`, dados);
         console.log("ID da lista:", id);
         console.log("Dados enviados para atualização:", dados);
-
+  
+        const listaAtualizada = await api.get(`/listas/${id}`);
+        console.log("Lista atualizada:", listaAtualizada.data);
+  
+        setTitulo(listaAtualizada.data.titulo);
+        setSessoes(listaAtualizada.data.sessoes);
+  
         alert("Lista atualizada com sucesso!");
       } else {
-        // Se estamos criando uma nova lista, fazemos um POST
+        // Cria uma nova lista
         await api.post("/listas", dados);
         alert("Lista criada com sucesso!");
-      } 
-      
-      navigate("/inicio"); // Navega para a página inicial após o salvamento
-
+      }
+  
+      navigate("/inicio"); // Redireciona para a página inicial após salvar
     } catch (error) {
       alert("Erro ao salvar lista");
       console.error(error);
@@ -183,14 +191,13 @@ export default function CriarLista() {
                 type="text"
                 placeholder="Nome da Sessão"
                 className="sessao-input"
-                value={sessao.titulo} // Vincule ao estado correto
+                value={sessao.titulo}
                 onChange={(e) => {
                   const novaSessao = [...sessoes];
-                  novaSessao[index].titulo = e.target.value; // Atualiza o título da sessão
-                  setSessoes(novaSessao); // Atualiza o estado
+                  novaSessao[index].titulo = e.target.value;
+                  setSessoes(novaSessao);
                 }}
               />
-
 
               <button className="botao-adicionar-tarefa" onClick={() => adicionarTarefa(index)}>
                 <IoAddOutline size={24} color="#ffc400" /> Adicionar Tarefa
@@ -206,7 +213,7 @@ export default function CriarLista() {
                         tarefa={tarefa}
                         atualizarTarefa={(id, updates) => atualizarTarefa(index, id, updates)}
                         removerTarefa={(id) => removerTarefa(index, id)}
-                        autoFocus={tarefa.autoFocus || false} // Passamos o autoFocus para o componente
+                        autoFocus={tarefa.autoFocus || false}
                       />
                     ))}
                   </div>

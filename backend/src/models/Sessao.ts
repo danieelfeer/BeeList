@@ -4,15 +4,17 @@ import { Tarefa } from "./Tarefa";
 
 @Entity()
 export class Sessao {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @Column({ length: 255 })
+  @Column()
   titulo: string;
 
+  // Cada sessão pertence a uma lista.
   @ManyToOne(() => Lista, lista => lista.sessoes)
-  lista: Lista; // Cada seção pertence a uma lista
+  lista: Lista;
 
-  @OneToMany(() => Tarefa, tarefa => tarefa.sessao)
-  tarefas: Tarefa[]; // Cada seção contém várias tarefas
+  // Uma sessão pode ter várias tarefas.
+  @OneToMany(() => Tarefa, tarefa => tarefa.sessao, { cascade: true })
+  tarefas: Tarefa[];
 }
