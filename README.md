@@ -39,6 +39,7 @@ cd backend/
 
 ```bash
 npm i
+npm install sqlite
 ```
 
 3. Inicie o servidor:
