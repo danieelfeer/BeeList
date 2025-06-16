@@ -36,7 +36,9 @@ const Cadastro = () => {
 
   return (
     <div className="cadastro-wrapper">
-      <img src="/src/assets/images/BeeListLogo.png" alt="Logo BeeList" className="BeeListLogoCadastro1" />
+      <div className="logo-cadastro">
+        <img src="/src/assets/images/BeeListLogo.png" alt="Logo BeeList" className="BeeListLogoCadastro1" />
+      </div>
       <div className="cadastro-container">
         <h2>Cadastro</h2>
         <form className="formCadastro" onSubmit={handleSubmit}>
@@ -55,7 +57,7 @@ const Cadastro = () => {
           <button className="buttonCadastro" type="submit">Cadastre-se</button>
           {message && <p className="cadastro-message">{message}</p>}
 
-          <Link to="/" className="TelaInicialCadastro">Tela inicial</Link>  
+          <Link to="/Login" className="TelaInicialCadastro">Tela inicial</Link>  
         </form>
       </div>
     </div>

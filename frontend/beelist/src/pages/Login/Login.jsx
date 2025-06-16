@@ -22,8 +22,11 @@ const Login = () => {
       });
 
       const data = await response.json();
+      console.log("Dados recebidos do backend:", data);
 
       if (response.status === 200) {
+        // Salva o nome do usuário no localStorage
+        localStorage.setItem("nomeUsuario", data.usuario?.nome || "Usuário");
         navigate('/inicio');
       } else {
         setMessage(data.error || data.message || 'Email ou senha inválidos');

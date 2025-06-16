@@ -25,25 +25,27 @@ export class UsuarioController {
     }
   }
 
-  // ...existing code...
-
   async login(req: Request, res: Response) {
     const { email, senha } = req.body;
+    const usuarioRepo = AppDataSource.getRepository(Usuario); // Adicione esta linha
+    const usuario = await usuarioRepo.findOneBy({ email });   // Use usuarioRepo
 
-    try {
-      const usuarioRepo = AppDataSource.getRepository(Usuario);
-      const usuario = await usuarioRepo.findOneBy({ email, senha });
-
-      if (!usuario) {
-        return res.status(401).json({ error: 'Email ou senha inválidos.' });
-      }
-
-      res.status(200).json({ message: 'Login realizado com sucesso!' });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Erro ao realizar login.' });
+    if (!usuario) {
+      return res.status(401).json({ message: "Email ou senha inválidos" });
     }
+
+    // Verifique a senha aqui (ajuste conforme sua lógica)
+    if (usuario.senha !== senha) {
+      return res.status(401).json({ message: "Email ou senha inválidos" });
+    }
+
+    return res.json({
+      message: "Login realizado com sucesso!",
+      usuario: {
+        nome: usuario.nome,
+        email: usuario.email
+      }
+    });
   }
 
-// ...existing code...
 }
