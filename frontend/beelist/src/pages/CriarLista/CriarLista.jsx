@@ -121,7 +121,7 @@ export default function CriarLista() {
   const salvarLista = async () => {
     try {
       const dados = {
-        nome: titulo,
+        titulo: titulo,
         sessoes: sessoes.map((sessao) => ({
           titulo: sessao.titulo,
           tarefas: sessao.tarefas.map((tarefa) => ({
