@@ -152,12 +152,29 @@ export default function CriarLista() {
     }
   };
 
+  const handleDeleteList = async () => {
+    try {
+        if (!id) {
+            console.error("ID da lista não encontrado!");
+            return;
+        }
+
+        await api.delete(`/listas/${id}`); // Faz a requisição para deletar a lista
+
+        alert("Lista deletada com sucesso!");
+        navigate("/inicio"); // Redireciona para a página inicial
+    } catch (error) {
+        console.error("Erro ao deletar lista:", error);
+        alert("Erro ao deletar lista!");
+    }
+};
+
+
   // Funções para o menu hamburguer
   const handleExportPDF = () => alert("Exportar como PDF");
   const handleExportXLS = () => alert("Exportar como XLS");
   const handlePrint = () => window.print();
   const handleGetPro = () => alert("Obter BeeList Pro");
-  const handleDeleteList = () => alert("Deletar lista");
 
   return (
     <div className="criar-lista">

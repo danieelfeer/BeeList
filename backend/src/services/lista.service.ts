@@ -76,9 +76,10 @@ export class ListaService {
 
   async delete(id: string): Promise<boolean> {
     const lista = await this.listaRepository.findOne(id);
-    if (!lista) return false;
+    if (!lista) return false; // Se não encontrar, retorna falso
 
-    await this.listaRepository.delete(lista);
+    await this.listaRepository.delete(id); // Apenas passa o ID para o repositório
     return true;
-  }
+  }   
+
 }

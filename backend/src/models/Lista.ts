@@ -10,6 +10,6 @@ export class Lista {
   titulo: string;
 
   // Uma lista pode ter várias sessões.
-  @OneToMany(() => Sessao, sessao => sessao.lista, { cascade: true })
+  @OneToMany(() => Sessao, sessao => sessao.lista, { cascade: ["remove"], onDelete: "CASCADE" })
   sessoes: Sessao[];
 }

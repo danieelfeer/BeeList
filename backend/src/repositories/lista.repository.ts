@@ -30,7 +30,8 @@ export class ListaRepository {
     return await this.repo.save(lista);
   }
 
-  async delete(lista: Lista): Promise<Lista> {
-    return await this.repo.remove(lista);
+  async delete(id: string): Promise<void> {
+    await this.repo.delete(id);
   }
+
 }
