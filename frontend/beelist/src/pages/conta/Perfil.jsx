@@ -1,95 +1,61 @@
-import { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { IoIosArrowBack } from "react-icons/io";
-import { LuPencilLine } from "react-icons/lu";
-import api from "../../api/axios"; // Certifique-se que seu endpoint está certo
 import "./Perfil.css";
 
-export default function Perfil() {
+export default function ProfileScreen({ perfil }) {
   const navigate = useNavigate();
-  const [usuario, setUsuario] = useState({
-    nome: "",
-    email: "",
-    telefone: ""
-  });
 
-  useEffect(() => {
-    // Substitua por um endpoint real que busque o usuário logado
-    api.get("/usuarios/me")
-      .then((res) => {
-        setUsuario(res.data);
-      })
-      .catch((err) => {
-        console.error("Erro ao buscar dados do usuário", err);
-      });
-  }, []);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUsuario((prev) => ({ ...prev, [name]: value }));
+  const handleBack = () => {
+    navigate("/conta");
   };
 
-  const handleSalvar = () => {
-    // Atualize o usuário com PUT ou PATCH
-    api.put("/usuarios/me", usuario)
-      .then(() => {
-        alert("Dados atualizados com sucesso!");
-        navigate("/inicio");
-      })
-      .catch((err) => {
-        console.error("Erro ao atualizar dados", err);
-        alert("Erro ao atualizar dados.");
-      });
-  };
-
-  const handleSair = () => {
-    // Remover token, limpar sessão, etc.
-    localStorage.clear();
-    navigate("/login");
+  const handleEdit = () => {
+    navigate("/editar-perfil");
   };
 
   return (
-    <div className="perfil-container">
-      <div className="topo">
-        <button className="botao-voltar" onClick={() => navigate("/Conta")}>
-          <IoIosArrowBack size={60} color="#ffc400" />
-        </button>
-      </div>
-
-      <div className="perfil-form">
-        <h2>Perfil do Usuário</h2>
-
-        <label>Nome:</label>
-        <input
-          type="text"
-          name="nome"
-          value={usuario.nome}
-          onChange={handleChange}
-        />
-
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={usuario.email}
-          onChange={handleChange}
-        />
-
-        <label>Telefone:</label>
-        <input
-          type="text"
-          name="telefone"
-          value={usuario.telefone}
-          onChange={handleChange}
-        />
-
-        <button className="botao-salvar" onClick={handleSalvar}>
-          <LuPencilLine size={20} /> Salvar alterações
+    <div className="screen-wrapper">
+      <div className="profile-container">
+        <button className="back-button" onClick={handleBack}>
+          ← Voltar
         </button>
 
-        <button className="botao-sair" onClick={handleSair}>
-          Sair da conta
-        </button>
+        <div className="profile-header">
+          <img
+            className="profile-avatar"
+            src="/src/assets/images/mat.png"
+            alt="Foto do usuário"
+          />
+          <h1 className="profile-name">{perfil.nome}</h1>
+          <p className="profile-email">{perfil.email}</p>
+        </div>
+
+        <div className="profile-stats">
+          <div className="stat-item">
+            <span className="stat-number">4</span>
+            <span className="stat-label">Listas</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-number">139</span>
+            <span className="stat-label">Itens</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-number">10%</span>
+            <span className="stat-label">Completos</span>
+          </div>
+        </div>
+
+        <div className="profile-actions">
+          <button className="edit-button" onClick={handleEdit}>
+            Editar Perfil
+          </button>
+          <button className="edit-button" onClick={() => navigate("/inicio")}>
+            Minhas Listas
+          </button>
+          <button className="logout-button" onClick={() => navigate("/login")}>
+            Sair
+          </button>
+        </div>
       </div>
     </div>
   );

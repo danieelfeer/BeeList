@@ -1,56 +1,198 @@
-.perfil-container {
-  padding: 2rem;
+body, html {
   background-color: #1c1c1c;
-  color: white;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+}
+
+.screen-wrapper {
   min-height: 100vh;
-}
-
-.perfil-form {
-  max-width: 400px;
-  margin: 0 auto;
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  justify-content: center;
+  align-items: center;
 }
 
-.perfil-form h2 {
-  color: #ffc400;
+.profile-container {
+  background-color: #1c1c1c;
+  max-width: 400px;
+  width: 100%;
+  padding: 30px 20px;
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
   text-align: center;
 }
 
-.perfil-form label {
+.profile-header {
+  margin-bottom: 30px;
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #ffc400;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.profile-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 5px 0;
+  color: #ffc400;
+}
+
+.profile-email {
+  font-size: 0.9rem;
+  color: #cccccc;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 1.2rem;
+  color: #ffc400;
   font-weight: bold;
 }
 
-.perfil-form input {
-  padding: 0.5rem;
-  border-radius: 8px;
-  border: none;
+.stat-label {
+  display: block;
+  font-size: 0.8rem;
+  color: #aaa;
 }
 
-.botao-salvar,
-.botao-sair {
-  background-color: #ffc400;
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.edit-button,
+.logout-button {
+  padding: 10px;
   border: none;
-  padding: 0.8rem;
-  border-radius: 12px;
+  border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: background 0.3s ease;
 }
 
-.botao-sair {
-  background-color: #ff5f5f;
+.edit-button {
+  background-color: #ffc400;
   color: #1c1c1c;
 }
 
-.botao-salvar:hover,
-.botao-sair:hover {
-  filter: brightness(1.1);
+.edit-button:hover {
+  background-color: #e6b800;
 }
 
-.topo .botao-voltar {
+.logout-button {
+  background-color: transparent;
+  color: #ffc400;
+  border: 2px solid #ffc400;
+}
+
+.logout-button:hover {
+  background-color: #2a2a2a;
+}
+
+.back-button {
   background: none;
   border: none;
-  margin-bottom: 1rem;
+  color: #ffc400;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 10px;
+  text-align: left;
+  display: inline-block;
+  padding: 5px 0;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+}
+
+
+/* Minhas Listas */
+
+.lists-section {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.lists {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-itemM {
+ background-color: transparent;
+  color: #ffc400;
+  border: 2px solid #ffc400;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.list-itemM:hover {
+  background-color: #2a2a2a;
+}
+
+.list-item {
+ background-color: transparent;
+  color: #ffc400;
+  border: 2px solid #ffc400;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.list-item:hover {
+  background-color: #2a2a2a;
+}
+
+/* Editar Perfil */
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  gap: 15px;
+}
+
+.edit-label {
+  text-align: left;
+  font-size: 0.9rem;
+  color: #ffc400;
+  margin-bottom: 5px;
+}
+
+.edit-input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background-color: #2a2a2a;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+}
+
+.edit-input:focus {
+  border-color: #ffc400;
+  box-shadow: 0 0 0 2px #ffc40055;
 }
