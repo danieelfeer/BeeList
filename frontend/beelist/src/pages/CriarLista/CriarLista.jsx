@@ -16,6 +16,9 @@ export default function CriarLista() {
 
   const [titulo, setTitulo] = useState("");
   const [sessoes, setSessoes] = useState([]);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const nomeUsuario = localStorage.getItem("nomeUsuario") || "Usuário";
 
   useEffect(() => {
     if (id) {
@@ -118,7 +121,7 @@ export default function CriarLista() {
   const salvarLista = async () => {
     try {
       const dados = {
-        nome: titulo,
+        titulo: titulo,
         sessoes: sessoes.map((sessao) => ({
           titulo: sessao.titulo,
           tarefas: sessao.tarefas.map((tarefa) => ({
@@ -149,12 +152,47 @@ export default function CriarLista() {
     }
   };
 
+  const handleDeleteList = async () => {
+    try {
+        if (!id) {
+            console.error("ID da lista não encontrado!");
+            return;
+        }
+
+        await api.delete(`/listas/${id}`); // Faz a requisição para deletar a lista
+
+        alert("Lista deletada com sucesso!");
+        navigate("/inicio"); // Redireciona para a página inicial
+    } catch (error) {
+        console.error("Erro ao deletar lista:", error);
+        alert("Erro ao deletar lista!");
+    }
+};
+
+
+  // Funções para o menu hamburguer
+  const handleExportPDF = () => alert("Exportar como PDF");
+  const handleExportXLS = () => alert("Exportar como XLS");
+  const handlePrint = () => window.print();
+  const handleGetPro = () => alert("Obter BeeList Pro");
+
   return (
     <div className="criar-lista">
       <div className="topo">
         <button className="botao-voltar" onClick={() => navigate("/inicio")}>
           <IoIosArrowBack size={60} color="#ffc400" />
         </button>
+        {/* Substitua o botão FaBars pelo HamburguerMenu */}
+        <div style={{ position: "absolute", top: "2rem", right: "2rem" }}>
+          <HamburguerMenu
+            nomeUsuario={nomeUsuario}
+            onExportPDF={handleExportPDF}
+            onExportXLS={handleExportXLS}
+            onPrint={handlePrint}
+            onGetPro={handleGetPro}
+            onDeleteList={handleDeleteList}
+          />
+        </div>
       </div>
 
       <main className="main-criar-lista">

@@ -1,14 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Sessao } from "./Sessao";
 
 @Entity()
 export class Lista {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @Column({ length: 255 })
-  nome: string;
+  @Column()
+  titulo: string;
 
-  @OneToMany(() => Sessao, (sessao) => sessao.lista)
+  // Uma lista pode ter várias sessões.
+  @OneToMany(() => Sessao, sessao => sessao.lista, { cascade: ["remove"], onDelete: "CASCADE" })
   sessoes: Sessao[];
 }

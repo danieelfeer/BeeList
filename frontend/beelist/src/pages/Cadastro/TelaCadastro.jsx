@@ -13,7 +13,7 @@ const TelaCadastro = () => (
       
       </h1>
       <p className="descricaoCadastro">
-        Já possui uma conta? <Link to="/">Faça login</Link>
+        Já possui uma conta? <Link to="/Login">Faça login</Link>
       </p>
     </div>
     <div className="right-sideCadastro">

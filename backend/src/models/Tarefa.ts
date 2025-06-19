@@ -3,15 +3,16 @@ import { Sessao } from "./Sessao";
 
 @Entity()
 export class Tarefa {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @Column({ length: 255 })
+  @Column()
   titulo: string;
 
   @Column({ default: false })
   concluida: boolean;
-
-  @ManyToOne(() => Sessao, (sessao) => sessao.tarefas)
+  
+  // Cada tarefa pertence a uma sessão.
+  @ManyToOne(() => Sessao, sessao => sessao.tarefas)
   sessao: Sessao;
 }
